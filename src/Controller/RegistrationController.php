@@ -54,6 +54,7 @@ class RegistrationController extends AbstractController
             );
             // do anything else you need here, like send an email
 
+            $this->addFlash("information", "Un courriel de validation vous a été envoyé.");
             return $this->redirectToRoute('home');
         }
 

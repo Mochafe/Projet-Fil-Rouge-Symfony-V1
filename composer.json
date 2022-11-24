@@ -25,6 +25,7 @@
         "symfony/http-client": "5.4.*",
         "symfony/intl": "5.4.*",
         "symfony/mailer": "5.4.*",
+        "symfony/messenger": "5.4.*",
         "symfony/mime": "5.4.*",
         "symfony/monolog-bundle": "^3.0",
         "symfony/notifier": "5.4.*",
@@ -93,6 +94,9 @@
             "php bin/console d:d:c",
             "php bin/console d:s:u --force",
             "php bin/console d:f:l --append"
+        ],
+        "mail": [
+            "php bin/console messenger:consume async  -vvv"
         ]
     },
     "conflict": {

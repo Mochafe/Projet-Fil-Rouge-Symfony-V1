@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="#">Green Village</a>
+		<a class="navbar-brand" href="{{ path("home") }}">Green Village</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -47,13 +47,13 @@
 								<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
 							</svg>
 						</a>
-						<div class="dropdown-menu profile-dropdown">
-							<div class="w-100 d-flex flex-column">
-								<span class="mx-auto">Example@Example.fr</span>
-								<span class="mx-auto fs-6 text-muted">Example Example</span>
+						<div class="dropdown-menu profile-dropdown w-auto">
+							<div class="w-auto d-flex flex-column mx-3 align-items-center">
+								<span >{{ app.user.email }}</span>
+								<span class="fs-6 text-muted">{{ app.user.firstName }} {{ app.user.lastName }}</span>
 							</div>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Mes information</a>
+							<a class="dropdown-item" href="{{ path("userProfile") }}">Mes information</a>
 							<a class="dropdown-item" href="#">Mes commandes</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item text-danger" href="{{ path("logout") }}">Deconnexion</a>

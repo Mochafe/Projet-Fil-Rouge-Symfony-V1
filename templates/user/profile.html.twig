@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Information
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="my-5 text-center">Vos Information</h1>
+
+		<ul class="nav nav-tabs" id="tabs" role="tablist">
+			<li class="nav-item" role="presentation">
+				<button class="nav-link active" id="InformationPersonnelle-tab" data-bs-toggle="tab" data-bs-target="#InformationPersonnelle-tab-pane" type="button" role="tab" aria-controls="InformationPersonnelle-tab-pane" aria-selected="true">Information Personnelle</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="securite-tab" data-bs-toggle="tab" data-bs-target="#securite-tab-pane" type="button" role="tab" aria-controls="securite-tab-pane" aria-selected="false">Sécurité</button>
+			</li>
+
+		</ul>
+		<div class="tab-content" id="tabsContent">
+			<div class="tab-pane fade show active" id="InformationPersonnelle-tab-pane" role="tabpanel" aria-labelledby="InformationPersonnelle-tab" tabindex="0">
+				<div class="row gy-3 mt-4">
+					<div class="col-6">
+						<label for="email" class="form-label">Adresse E-mail:</label>
+						<input type="email" class="form-control" id="email" placeholder="name@example.com" value="{{ app.user.email }}" disabled>
+					</div>
+					<div class="col-6">
+						<label for="birthDate" class="form-label">Date de naissance:</label>
+						<input type="date" class="form-control" id="birthDate" placeholder="name@example.com" value="{{ app.user.birthDate|date("Y-d-m") }}" disabled>
+					</div>
+					<div class="col-6">
+						<label for="firstName" class="form-label">Prénom:</label>
+						<input type="text" class="form-control" id="firstName" placeholder="name@example.com" value="{{ app.user.firstName }}" disabled>
+					</div>
+					<div class="col-6">
+						<label for="lastName" class="form-label">Nom:</label>
+						<input type="text" class="form-control" id="lastName" placeholder="name@example.com" value="{{ app.user.lastName }}" disabled>
+					</div>
+					<div class="col-6">
+						<label for="phone" class="form-label">Numero de téléphone:</label>
+						<input type="text" class="form-control" id="phone" placeholder="name@example.com" value="{{ app.user.phoneNumber }}" disabled>
+					</div>
+
+					<div class="col-12 text-center">
+						<a class="btn btn-warning" href="{{ path("userProfileUpdate") }}">Modifier</a>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="tab-pane fade" id="securite-tab-pane" role="tabpanel" aria-labelledby="securite-tab" tabindex="0">...</div>
+
+		</div>
+	</div>
+{% endblock %}
