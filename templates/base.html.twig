@@ -24,46 +24,32 @@
 		</header>
 		{% block body %}{% endblock %}
 
+
 		{% for message in app.flashes('success') %}
-			<div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-				<div class="d-flex">
-					<div class="toast-body">
-						{{ message }}
-					</div>
-					<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-				</div>
+			<div class="alert alert-success alert-dismissible fade show alert-position text-center rounded overflow-scroll" role="alert">
+				<p class="text-break overflow-scroll">{{ message }}</p>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
 		{% endfor %}
 		{% for message in app.flashes('information') %}
-			<div class="toast align-items-center text-bg-info border-0" role="alert" aria-live="assertive" aria-atomic="true">
-				<div class="d-flex">
-					<div class="toast-body">
-						{{ message }}
-					</div>
-					<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-				</div>
+			<div class="alert alert-info alert-dismissible fade show alert-position text-center rounded overflow-scroll" role="alert">
+				<p class="text-break overflow-scroll">{{ message }}</p>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
 		{% endfor %}
 		{% for message in app.flashes('warning') %}
-			<div class="toast align-items-center text-bg-warning border-0" role="alert" aria-live="assertive" aria-atomic="true">
-				<div class="d-flex">
-					<div class="toast-body">
-						{{ message }}
-					</div>
-					<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-				</div>
+			<div class="alert alert-warning alert-dismissible fade show alert-position text-center rounded overflow-scroll" role="alert">
+				<p class="text-break overflow-scroll">{{ message }}</p>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
 		{% endfor %}
 		{% for message in app.flashes('error') %}
-			<div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
-				<div class="d-flex">
-					<div class="toast-body">
-						{{ message }}
-					</div>
-					<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-				</div>
+			<div class="alert alert-danger alert-dismissible fade show alert-position text-center rounded overflow-scroll" role="alert">
+				<p class="text-break overflow-scroll">{{ message }}</p>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
 		{% endfor %}
+
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 		{% block javascripts %}

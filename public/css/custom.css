@@ -4,3 +4,16 @@
     left: 87% !important;
     top: 100px !important;
 }
+
+.alert-position {
+    max-width: 350px !important;
+    min-width: 300px !important;
+
+    max-height: 300px !important;
+
+    position: fixed !important;
+
+    left: 80% !important;
+    bottom: 20px !important;
+
+}
