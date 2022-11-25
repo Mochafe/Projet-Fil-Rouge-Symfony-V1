@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie
+{% endblock %}
+
+{% block body %}
+	<nav class="m-3" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a href="{{ path("home") }}">Accueil</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a href="{{ path("categoryMain") }}">Categorie</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a>{{ parentCategory.name }}</a>
+			</li>
+		</ol>
+	</nav>
+	<div class="container mt-5">
+		<h1 class="text-center">{{ parentCategory.name }}</h1>
+
+		<div class="row mt-5">
+			{% for category in categories %}
+				<div class="col-lg-2">
+					<a class="text-decoration-none" href="{{ path("categorySub", {category: category.id}) }}">
+						<div class="card p-2">
+							<img src="{{ category.image.path }}" class="card-img-top" alt="{{ category.image.title }}">
+							<div class="card-body">
+								<h5 class="card-title text-center">{{ category.name }}</h5>
+							</div>
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
