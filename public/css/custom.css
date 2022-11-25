@@ -17,3 +17,10 @@
     bottom: 20px !important;
 
 }
+
+.card-hover:hover {
+    transform: scale(1.05) !important;
+
+    transition-property: all !important;
+    transition-duration: 300ms !important;
+}
