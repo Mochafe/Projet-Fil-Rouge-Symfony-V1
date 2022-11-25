@@ -7,26 +7,26 @@
 	<div class="container">
 		<h1 class="my-5 text-center">Modifier vos information personnelle</h1>
 
-		<form class="row gy-3 mt-4">
+		<form action="{{ path("userProfileUpdate") }}" method="POST" class="row gy-3 mt-4">
 			<div class="col-6">
 				<label for="email" class="form-label">Adresse E-mail:</label>
-				<input type="email" class="form-control" id="email" placeholder="name@example.com" value="{{ app.user.email }}">
+				<input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" value="{{ app.user.email }}">
 			</div>
 			<div class="col-6">
 				<label for="birthDate" class="form-label">Date de naissance:</label>
-				<input type="date" class="form-control" id="birthDate" placeholder="name@example.com" value="{{ app.user.birthDate|date("Y-d-m") }}">
+				<input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="name@example.com" value="{{ app.user.birthDate|date("Y-m-d") }}">
 			</div>
 			<div class="col-6">
 				<label for="firstName" class="form-label">Prénom:</label>
-				<input type="text" class="form-control" id="firstName" placeholder="name@example.com" value="{{ app.user.firstName }}">
+				<input type="text" class="form-control" id="firstName" name="firstName" placeholder="name@example.com" value="{{ app.user.firstName }}">
 			</div>
 			<div class="col-6">
 				<label for="lastName" class="form-label">Nom:</label>
-				<input type="text" class="form-control" id="lastName" placeholder="name@example.com" value="{{ app.user.lastName }}">
+				<input type="text" class="form-control" id="lastName" name="lastName" placeholder="name@example.com" value="{{ app.user.lastName }}">
 			</div>
 			<div class="col-6">
 				<label for="phone" class="form-label">Numero de téléphone:</label>
-				<input type="text" class="form-control" id="phone" placeholder="name@example.com" value="{{ app.user.phoneNumber }}">
+				<input type="text" class="form-control" id="phone" name="phone" placeholder="name@example.com" value="{{ app.user.phoneNumber }}">
 			</div>
 
 			<div class="col-12 text-center">

@@ -25,7 +25,7 @@
 					</div>
 					<div class="col-6">
 						<label for="birthDate" class="form-label">Date de naissance:</label>
-						<input type="date" class="form-control" id="birthDate" placeholder="name@example.com" value="{{ app.user.birthDate|date("Y-d-m") }}" disabled>
+						<input type="date" class="form-control" id="birthDate" placeholder="name@example.com" value="{{ app.user.birthDate|date("Y-m-d") }}" disabled>
 					</div>
 					<div class="col-6">
 						<label for="firstName" class="form-label">Prénom:</label>
@@ -41,7 +41,7 @@
 					</div>
 
 					<div class="col-12 text-center">
-						<a class="btn btn-warning" href="{{ path("userProfileUpdate") }}">Modifier</a>
+						<a class="btn btn-warning" href="{{ path("userProfileUpdateForm") }}">Modifier</a>
 					</div>
 				</div>
 
