@@ -13,21 +13,25 @@
 				<a href="{{ path("categoryMain") }}">Categorie</a>
 			</li>
 			<li class="breadcrumb-item">
-				<a>{{ parentCategory.name }}</a>
+				<a href="{{ path("categorySub", {category: category.parent.id})}}">{{ category.parent.name }}</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a>{{ category.name }}</a>
 			</li>
 		</ol>
 	</nav>
 	<div class="container mt-5">
-		<h1 class="text-center">{{ parentCategory.name }}</h1>
+		<h1 class="text-center">{{ category.name }}</h1>
 
-		<div class="row mt-5">
-			{% for category in categories %}
+		<div class="row mt-5 g-3">
+			{% for product in products %}
 				<div class="col-lg-3 col-ml-4 my-3 card-hover">
-					<a class="text-decoration-none" href="{{ path("categoryProducts", {category: category.id}) }}">
+					<a class="text-decoration-none" href="">
 						<div class="card p-2">
-							<img src="{{ category.image.path }}" class="card-img-top" alt="{{ category.image.title }}">
+							<img src="{{ product.images[0].path }}" class="mx-auto w-25 h-auto" alt="{{ product.images[0].title }}">
 							<div class="card-body">
-								<h5 class="card-title text-center fs-5">{{ category.name }}</h5>
+								<h5 class="card-title text-center">{{ product.name }}</h5>
+								<p class="card-text text-center">{{ product.price }} €</p>
 							</div>
 						</div>
 					</a>

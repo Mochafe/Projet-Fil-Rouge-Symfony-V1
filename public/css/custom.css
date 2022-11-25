@@ -24,3 +24,7 @@
     transition-property: all !important;
     transition-duration: 300ms !important;
 }
+
+.card-max-h {
+    height: 250px !important;
+}

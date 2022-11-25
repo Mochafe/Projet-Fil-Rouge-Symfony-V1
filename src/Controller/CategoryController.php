@@ -32,4 +32,13 @@ class CategoryController extends AbstractController
             'categories' => $category->getChilds()
         ]);
     }
+
+    #[Route('/products/{category}', name: 'Products')]
+    public function products(Category $category): Response
+    {
+        return $this->render('category/products.html.twig', [
+            'category' => $category,
+            'products' => $category->getProducts()
+        ]);
+    }
 }
