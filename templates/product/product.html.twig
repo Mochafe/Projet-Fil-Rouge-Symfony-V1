@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ product.name }}
+{% endblock %}
+
+{% block body %}
+	<nav class="m-3" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a href="{{ path("home") }}">Accueil</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a href="{{ path("categoryMain") }}">Categorie</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a href="{{ path("categorySub", {category: product.category.parent.id})}}">{{ product.category.parent.name }}</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a href="{{ path("categoryProducts", {category: product.category.id }) }}">{{ product.category.name }}</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a>{{ product.name }}</a>
+			</li>
+		</ol>
+	</nav>
+
+	<div class="container my-5">
+		<h1 class="text-center">{{ product.name }}</h1>
+
+		<div class="row mt-5">
+			<div class="col-8">
+				<div id="imageCarousel" class="carousel slide" data-bs-ride="true">
+					<div class="carousel-indicators">
+						{% for index, image in product.images %}
+							<button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="{{ index }}" {% if index == 0 %} class="active" aria-current="true" {% endif %} aria-label="Slide {{index}}"></button>
+						{% endfor %}
+					</div>
+					<div class="carousel-inner">
+						{% for index, image in product.images %}
+							<div class="carousel-item {% if index == 0 %} active {% endif %}">
+								<img src="{{ image.path }}" class="d-block w-auto carousel-img-max-h mx-auto" alt="image.title">
+							</div>
+						{% endfor %}
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Précédent</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Suivant</span>
+					</button>
+				</div>
+			</div>
+            <div class="col-4">
+                <h2>{{ product.category.name }}</h2>
+            </div>
+		</div>
+	</div>
+{% endblock %}

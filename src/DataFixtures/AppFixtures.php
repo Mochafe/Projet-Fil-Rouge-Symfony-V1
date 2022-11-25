@@ -98,6 +98,13 @@ class AppFixtures extends Fixture
 
         $pGuitar->addImage($gElec);
 
+        $gElec = new Image();
+        $gElec->setPath("/img/product/Harley Benton R-458MN WH Fanfret/2.jpg");
+        $gElec->setTitle("Image de la guitare");
+        $manager->persist($gElec);
+
+        $pGuitar->addImage($gElec);
+
         $content["Référencé depuis"] = "Juin 2018";
         $content["Numéro d'article"] = "427252";
         $content["Conditionnement (UVC)"] = "1 Pièce(s)";

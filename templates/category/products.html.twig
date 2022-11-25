@@ -26,7 +26,7 @@
 		<div class="row mt-5 g-3">
 			{% for product in products %}
 				<div class="col-lg-3 col-ml-4 my-3 card-hover">
-					<a class="text-decoration-none" href="">
+					<a class="text-decoration-none" href="{{ path("productView", {product: product.id}) }}">
 						<div class="card p-2">
 							<img src="{{ product.images[0].path }}" class="mx-auto w-25 h-auto" alt="{{ product.images[0].title }}">
 							<div class="card-body">
