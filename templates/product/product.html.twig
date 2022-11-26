@@ -62,8 +62,7 @@
 
 					<span class="fs-1 mt-5 mx-auto">{{ product.price }}€</span>
 
-					<form
-						class="d-flex mt-4 mx-auto" action="" method="POST">
+					<form class="d-flex mt-4 mx-auto" action="{{ path("cartAdd", {product: product.id}) }}" method="POST">
 						{#TODO action#}
 						<input class="form-control text-center" type="number" name="quantity" min="1" value="1">
 						<button class="btn btn-primary" type="submit">Ajouter
@@ -76,7 +75,7 @@
 			</div>
 		</div>
 		<div class="row mt-5">
-			<div class="col-8 text-center">
+			<div class="col-8">
 				{% apply markdown_to_html %}
 				    {{ product.description }}
 				{% endapply %}

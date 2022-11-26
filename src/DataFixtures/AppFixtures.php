@@ -63,33 +63,7 @@ class AppFixtures extends Fixture
 
         $pGuitar = new Product();
         $pGuitar->setName("Harley Benton R-458MN WH Fanfret");
-        $pGuitar->setDescription("# Guitare éléctrique\n
-        <br>\n
-        - 8 cordes\n
-        - Série Progressive\n
-        - - Corps en tilleul\n
-        - Profil du manche: Speed D\n
-        - Manche vissé en érable\n
-        - Touche en érable\n
-        - Repères \"points décalés\"\n
-        - Sillet NuBone\n
-        - 24 frettes Medium Jumbo en éventail\n
-        - Rayon de la touche: 350 mm\n
-        - Largeur au sillet: 54 mm\n
-        - Diapason: 692/650 mm\n
-        - Barre de réglage (Truss Rod) double action\n
-        - 2 micros double bobinage Hi-Gain\n
-        - 1 réglage de volume\n
-        - 1 réglage de tonalité\n
-        - Sélecteur 3 positions\n
-        - Accastillage noir\n
-        - Mécaniques DLX moulées sous pression\n
-        - Tirant des cordes: .009, .011, .016, .024, .032, .042, .054, .065\n
-        - Accordage: Fa#, Si, Mi, La, Ré, Sol, Si, Mi\n
-        - Finition: Haute brillance\n
-        - Couleur: Blanc\n
-        - Housse adaptée optionnelle non-fournie (142777) \n
-        ");
+        $pGuitar->setDescription("# Guitare éléctrique\n\n- 8 cordes\n- Série Progressive\n- Corps en tilleul\n- Profil du manche: Speed D\n- Manche vissé en érable\n- Touche en érable\n- Repères \"points décalés\"\n- Sillet NuBone\n- 24 frettes Medium Jumbo en éventail\n- Rayon de la touche: 350 mm\n- Largeur au sillet: 54 mm\n- Diapason: 692/650 mm\n- Barre de réglage (Truss Rod) double action\n- 2 micros double bobinage Hi-Gain\n- 1 réglage de volume\n- 1 réglage de tonalité\n- Sélecteur 3 positions\n- Accastillage noir\n- Mécaniques DLX moulées sous pression\n- Tirant des cordes: .009, .011, .016, .024, .032, .042, .054, .065\n- Accordage: Fa#, Si, Mi, La, Ré, Sol, Si, Mi\n- Finition: Haute brillance\n- Couleur: Blanc\n- Housse adaptée optionnelle non-fournie (142777)\n");
 
         $gElec = new Image();
         $gElec->setPath("/img/product/Harley Benton R-458MN WH Fanfret/1.jpg");

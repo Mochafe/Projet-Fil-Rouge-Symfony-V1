@@ -1,8 +1,22 @@
 .profile-dropdown {
     position: fixed !important;
 
-    left: 87% !important;
+    max-width: 220px !important;
+
+    left: auto !important;
+    right: 5px !important;
     top: 100px !important;
+}
+
+.cart-dropdown {
+    position: fixed !important;
+
+    min-width: 200px !important;
+    max-width: 400px !important;
+
+    left: auto !important;
+    right: 5px !important;
+    top: 100px !important;;
 }
 
 .alert-position {

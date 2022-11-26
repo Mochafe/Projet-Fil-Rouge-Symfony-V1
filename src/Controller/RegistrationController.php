@@ -41,6 +41,9 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $cart = $user->getCart()->setUser($user);
+
+            $entityManager->persist($cart);
             $entityManager->persist($user);
             $entityManager->flush();
 
