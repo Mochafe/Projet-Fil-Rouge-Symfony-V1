@@ -36,10 +36,10 @@
 				{% endfor %}
 
 				<div class="col-12 my-5 d-flex flex-column fs-3">
-					<div>Sous-total: <span id="subtotal">{{ subtotal }}<span> €</div>
+					<div>Sous-total: <span id="subtotal"></span> €</div>
 					<div>Frais de livraison: 4,99 €</div>
-					<div>TVA: {{ app.user.vat }}% (+{{ subtotal * ((app.user.vat / 100)) }} €) </div>
-					<div class="fs-2">Total: {{ subtotal * ((app.user.vat /100) + 1) + 4.99}} €</div>
+					<div>TVA: {{ app.user.vat }}% (+<span id="vat-price" data-vat="{{ app.user.vat }}"></span> €) </div>
+					<div class="fs-2">Total: <span id="total"></span> €</div>
 				</div>
 
 				<div class="col-12 my-5">
