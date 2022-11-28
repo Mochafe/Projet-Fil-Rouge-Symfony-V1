@@ -26,6 +26,7 @@
 								<div class="d-flex mt-5 justify-content-center">
 									<input class="form-control h-50 w-25" type="number" name="quantity" id="quantity" value="{{ cartDetail.quantity }}">
 									<form action="{{ path("cartDelete") }}" method="post">
+                                    <input type="hidden" name="cartDetail" value="{{ cartDetail.id }}">
 										<input type="submit" class="btn btn-danger" value="Supprimer">
 									</form>
 								</div>

@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Route('/cart', name: 'cart')]
 class CartController extends AbstractController
@@ -19,17 +20,42 @@ class CartController extends AbstractController
     #[Route('/view', name: 'View')]
     public function view(): Response
     {
+        if(!$this->getUser()) {
+            $this->addFlash("error", "Vous n'êtes pas connecté");
+            return $this->redirectToRoute("login");
+        }
         return $this->render('cart/view.html.twig', [
             "cart" => $this->getUser()->getCart()
         ]);
     }
 
     #[Route('/delete', name: 'Delete')]
-    public function delete(Request $request): Response
+    public function delete(Request $request, CartDetailRepository $cartDetailRepository): Response
     {
-        return $this->render('cart/view.html.twig', [
-            "cart" => $this->getUser()->getCart()
-        ]);
+        $user = $this->getUser();
+
+        if(!$user) {
+            $this->addFlash("error", "Vous n'êtes pas connecté");
+            return $this->redirectToRoute("login");
+        }
+
+        $cartDetailId = intval($request->request->get("cartDetail"));
+
+        if(!$cartDetailId) {
+            $this->addFlash("error", "Une erreur est survenu");
+            return $this->redirectToRoute("cartView");
+        } 
+
+        $cartDetail = belongToUser($user, $cartDetailId);
+
+        if(!$cartDetail) {
+            $this->addFlash("error", "Une erreur est survenu");
+            return $this->redirectToRoute("cartView");
+        }
+
+        $cartDetailRepository->remove($cartDetail, true);
+
+        return $this->redirectToRoute("cartView");
     }
 
     #[Route('/add/{product}', name: 'Add', methods: ["POST"])]
@@ -94,6 +120,14 @@ function productExist(Cart $cart, Product $product): CartDetail | null
         if ($cd->getProduct()->getId() === $product->getId()) {
             return $cd;
         }
+    }
+
+    return null;
+}
+
+function belongToUser(UserInterface $user, $id): CartDetail | null {
+    foreach($user->getCart()->getCartDetails() as $cartDetail) {
+        if($cartDetail->getId() === $id) return $cartDetail;
     }
 
     return null;

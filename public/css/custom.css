@@ -27,8 +27,9 @@
 
     position: fixed !important;
 
-    left: 80% !important;
-    bottom: 20px !important;
+    left: auto !important;
+    right: 1% !important;
+    bottom: 40px !important;
 
 }
 
