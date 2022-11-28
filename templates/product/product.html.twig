@@ -37,11 +37,17 @@
 						{% endfor %}
 					</div>
 					<div class="carousel-inner">
-						{% for index, image in product.images %}
-							<div class="carousel-item {% if index == 0 %} active {% endif %}">
-								<img src="{{ image.path }}" class="d-block w-auto carousel-img-max-h mx-auto" alt="image.title">
+						{% if product.images|length > 0 %}
+							{% for index, image in product.images %}
+								<div class="carousel-item {% if index == 0 %} active {% endif %}">
+									<img src="{{ image.path }}" class="d-block product-img mx-auto" alt="{{ image.title }}">
+								</div>
+							{% endfor %}
+						{% else %}
+							<div class="carousel-item active">
+								<img src="/img/placeholder.png" class="d-block product-img mx-auto" alt="placeholder">
 							</div>
-						{% endfor %}
+						{% endif %}
 					</div>
 					<button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
 						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -62,7 +68,8 @@
 
 					<span class="fs-1 mt-5 mx-auto">{{ product.price }}€</span>
 
-					<form class="d-flex mt-4 mx-auto" action="{{ path("cartAdd", {product: product.id}) }}" method="POST">
+					<form
+						class="d-flex mt-4 mx-auto" action="{{ path("cartAdd", {product: product.id}) }}" method="POST">
 						{#TODO action#}
 						<input class="form-control text-center" type="number" name="quantity" min="1" value="1">
 						<button class="btn btn-primary" type="submit">Ajouter
@@ -77,19 +84,19 @@
 		<div class="row mt-5">
 			<div class="col-8">
 				{% apply markdown_to_html %}
-				    {{ product.description }}
+				{{ product.description }}
 				{% endapply %}
 			</div>
 			<div class="col-4">
 				<table class="table table-hover table-striped">
 					<tbody>
-                        {% for index, item in product.content %}
-                            <tr>
-                                <td>{{ index }}</td>
-                                <td>{{ item }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
+						{% for index, item in product.content %}
+							<tr>
+								<td>{{ index }}</td>
+								<td>{{ item }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
 				</table>
 			</div>
 		</div>

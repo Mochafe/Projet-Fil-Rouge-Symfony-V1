@@ -20,7 +20,15 @@ class CartController extends AbstractController
     public function view(): Response
     {
         return $this->render('cart/view.html.twig', [
-            'controller_name' => 'CartController',
+            "cart" => $this->getUser()->getCart()
+        ]);
+    }
+
+    #[Route('/delete', name: 'Delete')]
+    public function delete(Request $request): Response
+    {
+        return $this->render('cart/view.html.twig', [
+            "cart" => $this->getUser()->getCart()
         ]);
     }
 

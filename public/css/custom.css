@@ -46,3 +46,23 @@
 .carousel-img-max-h {
     height: 500px !important;
 }
+
+.cart-item {
+    height: 250px !important;
+}
+
+.cart-img {
+
+    height: 200px !important;
+    width: auto !important;
+}
+
+.products-img {
+    height: 230px !important;
+    width: auto !important;
+}
+
+.product-img {
+    height: 500px !important;
+    width: auto !important;
+}
