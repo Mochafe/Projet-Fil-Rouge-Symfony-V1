@@ -39,7 +39,25 @@
 						<label for="phone" class="form-label">Numero de téléphone:</label>
 						<input type="text" class="form-control" id="phone" placeholder="name@example.com" value="{{ app.user.phoneNumber }}" disabled>
 					</div>
-
+					{% if app.user.addresses|length > 0 %}
+					<div class="col-12 mt-5 border-bottom">
+						<span class="fs-3">Adresses:</span>
+					</div>
+					{% for address in app.user.addresses %}
+						<div class="col-3">
+							<input type="text" value="{{ address.street }}" disabled>
+						</div>
+						<div class="col-3">
+							<input type="text" value="{{ address.zipcode }}" disabled>
+						</div>
+						<div class="col-3">
+							<input type="text" value="{{ address.city }}" disabled>
+						</div>
+						<div class="col-3">
+							<input type="text" value="{{ address.country }}" disabled>
+						</div>
+					{% endfor %}
+					{% endif %}
 					<div class="col-12 text-center">
 						<a class="btn btn-warning" href="{{ path("userProfileUpdateForm") }}">Modifier</a>
 					</div>
