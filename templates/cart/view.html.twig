@@ -24,7 +24,7 @@
 								<p class="card-text text-center">{{ cartDetail.product.price * cartDetail.quantity }}€</p>
 
 								<div class="d-flex my-5 justify-content-center">
-									<input class="form-control h-50 w-25" type="number" name="quantity" id="quantity" value="{{ cartDetail.quantity }}">
+									<input class="form-control h-50 w-25" type="number" name="quantity" id="quantity" data-id={{ cartDetail.id }} value="{{ cartDetail.quantity }}" min="1">
 									<form action="{{ path("cartDelete") }}" method="post">
                                     <input type="hidden" name="cartDetail" value="{{ cartDetail.id }}">
 										<input type="submit" class="btn btn-danger" value="Supprimer">

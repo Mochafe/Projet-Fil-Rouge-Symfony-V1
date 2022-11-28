@@ -110,7 +110,40 @@ class CartController extends AbstractController
         $this->addFlash("success", "Produit ajouté");
         return $this->redirectToRoute("productView", ["product" => $product->getId()]);
     }
+
+    #[Route('/update', name: 'Update')]
+    public function update(Request $request, CartDetailRepository $cartDetailRepository): Response
+    {
+        $user = $this->getUser();
+
+        if(!$user) {
+            $this->addFlash("error", "Vous n'êtes pas connecté");
+            return $this->redirectToRoute("login");
+        }
+
+        $cartDetailId = intval($request->query->get("cartDetail"));
+        $quantity = intval($request->query->get("quantity"));
+
+
+        if(!$cartDetailId || !$quantity) {
+            $this->addFlash("error", "Une erreur est survenu");
+            return $this->redirectToRoute("cartView");
+        } 
+
+        $cartDetail = belongToUser($user, $cartDetailId);
+
+        if(!$cartDetail) {
+            $this->addFlash("error", "Une erreur est survenu");
+            return $this->redirectToRoute("cartView");
+        }
+
+        $cartDetail->setQuantity($quantity);
+        $cartDetailRepository->save($cartDetail, true);
+
+        return $this->redirectToRoute("cartView");
+    }
 }
+
 
 function productExist(Cart $cart, Product $product): CartDetail | null
 {
