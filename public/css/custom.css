@@ -62,6 +62,10 @@
     width: auto !important;
 }
 
+.products-card {
+    min-height: 400px !important;
+}
+
 .products-img {
     height: 230px !important;
     width: auto !important;
@@ -70,4 +74,14 @@
 .product-img {
     height: 500px !important;
     width: auto !important;
+}
+
+.w-fit {
+    width: fit-content !important;
+}
+
+@media screen and (min-width: 768px) {
+    .md-w-fit {
+        width: fit-content !important;
+    }
 }
