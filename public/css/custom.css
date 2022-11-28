@@ -53,8 +53,12 @@
 }
 
 .cart-img {
-
     height: 200px !important;
+    width: auto !important;
+    
+}
+.cart-img-min {
+    height: 100px !important;
     width: auto !important;
 }
 

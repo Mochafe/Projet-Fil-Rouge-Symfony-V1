@@ -30,7 +30,7 @@
 
 		<div class="row mt-5">
 			<div class="col-8">
-				<div id="imageCarousel" class="carousel slide" data-bs-ride="true">
+				<div id="imageCarousel" class="carousel carousel-dark slide" data-bs-ride="true">
 					<div class="carousel-indicators">
 						{% for index, image in product.images %}
 							<button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="{{ index }}" {% if index == 0 %} class="active" aria-current="true" {% endif %} aria-label="Slide {{index}}"></button>
@@ -68,9 +68,7 @@
 
 					<span class="fs-1 mt-5 mx-auto">{{ product.price }}€</span>
 
-					<form
-						class="d-flex mt-4 mx-auto" action="{{ path("cartAdd", {product: product.id}) }}" method="POST">
-						{#TODO action#}
+					<form class="d-flex mt-4 mx-auto" action="{{ path("cartAdd", {product: product.id}) }}" method="POST">
 						<input class="form-control text-center" type="number" name="quantity" min="1" value="1">
 						<button class="btn btn-primary" type="submit">Ajouter
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus-fill" viewbox="0 0 16 16">

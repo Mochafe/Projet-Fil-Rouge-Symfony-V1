@@ -24,9 +24,7 @@ class CartController extends AbstractController
             $this->addFlash("error", "Vous n'êtes pas connecté");
             return $this->redirectToRoute("login");
         }
-        return $this->render('cart/view.html.twig', [
-            "cart" => $this->getUser()->getCart()
-        ]);
+        return $this->render('cart/view.html.twig');
     }
 
     #[Route('/delete', name: 'Delete')]

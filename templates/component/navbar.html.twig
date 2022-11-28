@@ -41,13 +41,31 @@
 						</a>
 						<div class="dropdown-menu w-auto cart-dropdown">
 							<div class="d-flex justify-content-center">
-								<a href="{{ path("cartView") }}"><span class="fs-3 strong">Panier</span></a>
+								<a href="{{ path("cartView") }}">
+									<span class="fs-3 strong">Panier</span>
+								</a>
 							</div>
 
 							<div class="dropdown-divider"></div>
 							{% if app.user.cart.cartDetails is null or app.user.cart.cartDetails|length < 1 %}
 								<div class="mx-3 text-center">
 									<span>Votre Panier est vide</span>
+								</div>
+							{% else %}
+								{% for cartDetail in app.user.cart.cartDetails %}
+									<a href="{{ path("productView", {product: cartDetail.product.id}) }}" class="dropdown-item">
+										{% if cartDetail.product.images|length > 0 %}
+											<img src="{{ cartDetail.product.images[0].path }}" class="mx-auto cart-img-min" alt="{{ cartDetail.product.images[0].title }}">
+										{% else %}
+											<img src="/img/placeholder.png" class="mx-auto cart-img" alt="placeholder">
+										{% endif %}
+
+										<span>{{ cartDetail.product.name }}</span>
+									</a>
+								{% endfor %}
+								<div class="dropdown-divider"></div>
+								<div class="text-center">
+									<a class="btn btn-primary" href="{{ path("cartView") }}">Voir le panier</a>
 								</div>
 							{% endif %}
 						</div>
