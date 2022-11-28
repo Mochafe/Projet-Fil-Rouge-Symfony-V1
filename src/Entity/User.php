@@ -19,6 +19,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     function __construct() {
         $this->signUpDate = new \DateTime();
         $this->cart = new Cart();
+        $this->vat = 20;
     }
 
     #[ORM\Id]
@@ -61,6 +62,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Cart $cart = null;
+
+    #[ORM\Column]
+    private ?int $vat = null;
 
     public function getId(): ?int
     {
@@ -253,6 +257,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->cart = $cart;
+
+        return $this;
+    }
+
+    public function getVat(): ?int
+    {
+        return $this->vat;
+    }
+
+    public function setVat(int $vat): self
+    {
+        $this->vat = $vat;
 
         return $this;
     }

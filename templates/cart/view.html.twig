@@ -21,10 +21,10 @@
 							</div>
 							<div class="card-body">
 								<h5 class="card-title text-center">{{ cartDetail.product.name }}</h5>
-								<p class="card-text text-center">{{ cartDetail.product.price * cartDetail.quantity }}€</p>
+								<p name="prices" class="card-text text-center">{{ cartDetail.product.price * cartDetail.quantity }}€</p>
 
 								<div class="d-flex my-5 justify-content-center">
-									<input class="form-control h-50 w-25" type="number" name="quantity" id="quantity" data-id={{ cartDetail.id }} value="{{ cartDetail.quantity }}" min="1">
+									<input class="form-control h-50 w-25" type="number" name="quantity" id="quantity" data-price={{ cartDetail.product.price }} data-id={{ cartDetail.id }} value="{{ cartDetail.quantity }}" min="1">
 									<form action="{{ path("cartDelete") }}" method="post">
                                     <input type="hidden" name="cartDetail" value="{{ cartDetail.id }}">
 										<input type="submit" class="btn btn-danger" value="Supprimer">
@@ -35,7 +35,14 @@
 					</div>
 				{% endfor %}
 
-				<div class="col-12 mt-5">
+				<div class="col-12 my-5 d-flex flex-column fs-3">
+					<div>Sous-total: <span id="subtotal">{{ subtotal }}<span> €</div>
+					<div>Frais de livraison: 4,99 €</div>
+					<div>TVA: {{ app.user.vat }}% (+{{ subtotal * ((app.user.vat / 100)) }} €) </div>
+					<div class="fs-2">Total: {{ subtotal * ((app.user.vat /100) + 1) + 4.99}} €</div>
+				</div>
+
+				<div class="col-12 my-5">
 					<a class="btn btn-primary col-12" href="">Commander</a>
 				</div>
 			</div>

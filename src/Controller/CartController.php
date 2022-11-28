@@ -20,11 +20,21 @@ class CartController extends AbstractController
     #[Route('/view', name: 'View')]
     public function view(): Response
     {
-        if(!$this->getUser()) {
+        $user = $this->getUser();
+        if(!$user) {
             $this->addFlash("error", "Vous n'êtes pas connecté");
             return $this->redirectToRoute("login");
         }
-        return $this->render('cart/view.html.twig');
+
+        $subtotal = 0;
+
+        foreach($user->getCart()->getCartDetails() as $cartDetail) {
+            $subtotal += $cartDetail->getQuantity() * $cartDetail->getProduct()->getPrice();
+        }
+
+        return $this->render('cart/view.html.twig', [
+            "subtotal" => $subtotal
+        ]);
     }
 
     #[Route('/delete', name: 'Delete')]
