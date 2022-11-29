@@ -3,13 +3,22 @@
 namespace App\Entity;
 
 use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Nette\Utils\DateTime;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
 class Order
 {
+    function __construct() {
+        $this->createAt = new DateTime();
+        $this->shipped = false;
+        $this->orderDetails = new ArrayCollection();
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -24,8 +33,19 @@ class Order
     #[ORM\Column(type: Types::ARRAY)]
     private array $paymentMethod = [];
 
-    #[ORM\Column(length: 255)]
-    private ?string $cardOwner = null;
+
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    private ?Address $billingAddress = null;
+
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    private ?Address $deliveryAddress = null;
+
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    #[ORM\OneToMany(mappedBy: 'orderUser', targetEntity: OrderDetail::class)]
+    private Collection $orderDetails;
 
     public function getId(): ?int
     {
@@ -68,14 +88,69 @@ class Order
         return $this;
     }
 
-    public function getCardOwner(): ?string
+
+    public function getBillingAddress(): ?Address
     {
-        return $this->cardOwner;
+        return $this->billingAddress;
     }
 
-    public function setCardOwner(string $cardOwner): self
+    public function setBillingAddress(?Address $billingAddress): self
     {
-        $this->cardOwner = $cardOwner;
+        $this->billingAddress = $billingAddress;
+
+        return $this;
+    }
+
+    public function getDeliveryAddress(): ?Address
+    {
+        return $this->deliveryAddress;
+    }
+
+    public function setDeliveryAddress(?Address $deliveryAddress): self
+    {
+        $this->deliveryAddress = $deliveryAddress;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderDetail>
+     */
+    public function getOrderDetails(): Collection
+    {
+        return $this->orderDetails;
+    }
+
+    public function addOrderDetail(OrderDetail $orderDetail): self
+    {
+        if (!$this->orderDetails->contains($orderDetail)) {
+            $this->orderDetails->add($orderDetail);
+            $orderDetail->setOrderUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderDetail(OrderDetail $orderDetail): self
+    {
+        if ($this->orderDetails->removeElement($orderDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($orderDetail->getOrderUser() === $this) {
+                $orderDetail->setOrderUser(null);
+            }
+        }
 
         return $this;
     }

@@ -11,8 +11,10 @@ user
 createdAt
 updatedAt
 number
+orders
 }
 
+Address -- Order
 class Cart{
 PK - id
 user
@@ -27,6 +29,23 @@ product
 quantity
 }
 
+class Image{
+PK - id
+path
+title
+product
+}
+
+class Order{
+PK - id
+createAt
+shipped
+paymentMethod
+billingAddress
+deliveryAddress
+user
+}
+
 class Category{
 PK - id
 name
@@ -39,10 +58,8 @@ products
 Category -- self
 Category -- self
 Category -- Product
-class Image{
+class OrderDetail{
 PK - id
-path
-title
 product
 }
 
@@ -59,10 +76,12 @@ category
 content
 images
 cartDetails
+orderDetails
 }
 
 Product -- Image
 Product -- CartDetail
+Product -- OrderDetail
 class Professional{
 PK - id
 companyName
@@ -85,8 +104,10 @@ professional
 cart
 vat
 addresses
+orders
 }
 
 User -- Address
+User -- Order
 
 ```

@@ -4,16 +4,16 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container my-5 container-margin">
+	<form action="{{ path("orderProcess") }}" method="POST" class="container my-5 container-margin">
 		<h1 class="text-center">Procéder au paiement</h1>
 		<div class="row gy-3 mt-4">
 			<div class="col-12 col-lg-6">
 				<label for="firstName" class="form-label">Prénom:</label>
-				<input type="text" class="form-control" id="firstName" placeholder="name@example.com" value="{{ app.user.firstName }}">
+				<input type="text" class="form-control" id="firstName" name="firstName" placeholder="name@example.com" value="{{ app.user.firstName }}" required>
 			</div>
 			<div class="col-12 col-lg-6">
 				<label for="lastName" class="form-label">Nom:</label>
-				<input type="text" class="form-control" id="lastName" placeholder="name@example.com" value="{{ app.user.lastName }}">
+				<input type="text" class="form-control" id="lastName" name="lastName" placeholder="name@example.com" value="{{ app.user.lastName }}" required>
 			</div>
 
 			<div class="col-12">
@@ -23,35 +23,35 @@
 
 			{% if app.user.addresses|length > 0 %}
 				<div class="col-12 col-lg-2">
-					<input class="form-control" type="text" value="{{ app.user.addresses[0].number }}" placeholder="Numero de voie">
+					<input class="form-control" name="delivery-number" type="text" value="{{ app.user.addresses[0].number }}" placeholder="Numero de voie" required>
 				</div>
 				<div class="col-12 col-lg-3">
-					<input class="form-control" type="text" value="{{ app.user.addresses[0].street }}" placeholder="Rue, Allée, Avenue...">
+					<input class="form-control" name="delivery-street" type="text" value="{{ app.user.addresses[0].street }}" placeholder="Rue, Allée, Avenue..." required>
 				</div>
 				<div class="col-12 col-lg-2">
-					<input class="form-control" type="text" value="{{ app.user.addresses[0].zipcode }}" placeholder="Code postal">
+					<input class="form-control" name="delivery-zipcode" type="text" value="{{ app.user.addresses[0].zipcode }}" placeholder="Code postal" required>
 				</div>
 				<div class="col-12 col-lg-3">
-					<input class="form-control" type="text" value="{{ app.user.addresses[0].city }}" placeholder="Ville">
+					<input class="form-control" name="delivery-city" type="text" value="{{ app.user.addresses[0].city }}" placeholder="Ville" required>
 				</div>
 				<div class="col-12 col-lg-2 mb-3">
-					<input class="form-control" type="text" value="{{ app.user.addresses[0].country }}" placeholder="Pays">
+					<input class="form-control" name="delivery-country" type="text" value="{{ app.user.addresses[0].country }}" placeholder="Pays" required>
 				</div>
 			{% else %}
 				<div class="col-12 col-lg-2">
-					<input class="form-control" type="text" name="number" placeholder="Numero de voie">
+					<input class="form-control" type="text" name="delivery-number" placeholder="Numero de voie" required>
 				</div>
 				<div class="col-12 col-lg-3">
-					<input class="form-control" type="text" name="street" placeholder="Rue, Allée, Avenue...">
+					<input class="form-control" type="text" name="delivery-street" placeholder="Rue, Allée, Avenue..." required>
 				</div>
 				<div class="col-12 col-lg-2">
-					<input class="form-control" type="text" name="zipcode" placeholder="Code postal">
+					<input class="form-control" type="text" name="delivery-zipcode" placeholder="Code postal" required>
 				</div>
 				<div class="col-12 col-lg-3">
-					<input class="form-control" type="text" name="city" placeholder="Ville">
+					<input class="form-control" type="text" name="delivery-city" placeholder="Ville" required>
 				</div>
 				<div class="col-12 col-lg-2 mb-3">
-					<input class="form-control" type="text" name="country" placeholder="Pays">
+					<input class="form-control" type="text" name="delivery-country" placeholder="Pays" required>
 				</div>
 			{% endif %}
 
@@ -63,35 +63,35 @@
 
 			{% if app.user.addresses|length > 0 %}
 				<div class="col-12 col-lg-2">
-					<input class="form-control" type="text" value="{{ app.user.addresses[0].number }}" placeholder="Numero de voie">
+					<input class="form-control" type="text" name="billing-number"  value="{{ app.user.addresses[0].number }}" placeholder="Numero de voie" required>
 				</div>
 				<div class="col-12 col-lg-3">
-					<input class="form-control" type="text" value="{{ app.user.addresses[0].street }}" placeholder="Rue, Allée, Avenue...">
+					<input class="form-control" type="text" name="billing-street" value="{{ app.user.addresses[0].street }}" placeholder="Rue, Allée, Avenue..." required>
 				</div>
 				<div class="col-12 col-lg-2">
-					<input class="form-control" type="text" value="{{ app.user.addresses[0].zipcode }}" placeholder="Code postal">
+					<input class="form-control" type="text" name="billing-zipcode" value="{{ app.user.addresses[0].zipcode }}" placeholder="Code postal" required>
 				</div>
 				<div class="col-12 col-lg-3">
-					<input class="form-control" type="text" value="{{ app.user.addresses[0].city }}" placeholder="Ville">
+					<input class="form-control" type="text" name="billing-city" value="{{ app.user.addresses[0].city }}" placeholder="Ville" required>
 				</div>
 				<div class="col-12 col-lg-2 mb-3">
-					<input class="form-control" type="text" value="{{ app.user.addresses[0].country }}" placeholder="Pays">
+					<input class="form-control" type="text" name="billing-country" value="{{ app.user.addresses[0].country }}" placeholder="Pays" required>
 				</div>
 			{% else %}
 				<div class="col-12 col-lg-2">
-					<input class="form-control" type="text" name="number" placeholder="Numero de voie">
+					<input class="form-control" type="text" name="billing-number" placeholder="Numero de voie" required>
 				</div>
 				<div class="col-12 col-lg-3">
-					<input class="form-control" type="text" name="street" placeholder="Rue, Allée, Avenue...">
+					<input class="form-control" type="text" name="billing-street" placeholder="Rue, Allée, Avenue..." required>
 				</div>
 				<div class="col-12 col-lg-2">
-					<input class="form-control" type="text" name="zipcode" placeholder="Code postal">
+					<input class="form-control" type="text" name="billing-zipcode" placeholder="Code postal" required>
 				</div>
 				<div class="col-12 col-lg-3">
-					<input class="form-control" type="text" name="city" placeholder="Ville">
+					<input class="form-control" type="text" name="billing-city" placeholder="Ville" required>
 				</div>
 				<div class="col-12 col-lg-2 mb-3">
-					<input class="form-control" type="text" name="country" placeholder="Pays">
+					<input class="form-control" type="text" name="billing-country" placeholder="Pays" required>
 				</div>
 			{% endif %}
 
@@ -105,20 +105,20 @@
 			</div>
 			<div class="col-12">
 				<label for="card-owner">Titulaire de la carte</label>
-				<input id="card-owner" type="text" class="form-control" value="{{ app.user.firstName }} {{ app.user.lastName }}" placeholder="John Doe">
+				<input id="card-owner" name="cardOwner" type="text" class="form-control" value="{{ app.user.firstName }} {{ app.user.lastName }}" placeholder="John Doe" required>
 			</div>
 
 			<div class="col-6">
 				<label for="card-number">Numero de carte:</label>
-				<input id="card-number" type="text" class="form-control">
+				<input id="card-number" name="cardNumber" type="text" class="form-control" required>
 			</div>
 			<div class="col-3">
-				<label for="card-number">Code CVV:</label>
-				<input id="card-number" type="text" class="form-control" minlength="3" maxlength="3" pattern="\d{3}">
+				<label for="card-cvv">Code CVV:</label>
+				<input id="card-cvv" name="cardCvv" type="text" class="form-control" minlength="3" maxlength="3" pattern="\d{3}" required>
 			</div>
 			<div class="col-3">
-				<label for="card-number">Date d'expiration:</label>
-				<input id="card-number" type="month" class="form-control">
+				<label for="card-date">Date d'expiration:</label>
+				<input id="card-date" name="cardDate" type="month" class="form-control" required>
 			</div>
 
 			<div class="col-12">
@@ -126,5 +126,5 @@
 			</div>
 
 		</div>
-	</div>
+	</form>
 {% endblock %}
