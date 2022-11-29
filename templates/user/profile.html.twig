@@ -4,8 +4,18 @@
 {% endblock %}
 
 {% block body %}
+<nav class="m-3 breadcrumb-margin" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a href="{{ path("home") }}">Accueil</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a>Profil</a>
+			</li>
+		</ol>
+	</nav>
 	<div class="container">
-		<h1 class="my-5 text-center">Vos Information</h1>
+		<h1 class="mb-5 text-center">Vos Information</h1>
 
 		<ul class="nav nav-tabs" id="tabs" role="tablist">
 			<li class="nav-item" role="presentation">
@@ -40,25 +50,32 @@
 						<input type="text" class="form-control" id="phone" placeholder="name@example.com" value="{{ app.user.phoneNumber }}" disabled>
 					</div>
 					{% if app.user.addresses|length > 0 %}
-					<div class="col-12 mt-5 border-bottom">
-						<span class="fs-3">Adresses:</span>
-					</div>
-					{% for address in app.user.addresses %}
-						<div class="col-3">
-							<input type="text" value="{{ address.street }}" disabled>
+						<div class="col-12 mt-5 border-bottom">
+							<span class="fs-3">Adresses:</span>
 						</div>
-						<div class="col-3">
-							<input type="text" value="{{ address.zipcode }}" disabled>
-						</div>
-						<div class="col-3">
-							<input type="text" value="{{ address.city }}" disabled>
-						</div>
-						<div class="col-3">
-							<input type="text" value="{{ address.country }}" disabled>
-						</div>
-					{% endfor %}
+						{% for address in app.user.addresses %}
+							<div class="offset-9 col-3 text-end text-muted fs-6 mt-3">Dernière modification: {{ address.updatedAt|date('Y-m-d') }}</div>
+
+
+							<div class="col-12 col-lg-2">
+								<input class="form-control" type="text" value="{{ address.number }}" disabled>
+							</div>
+							<div class="col-12 col-lg-3">
+								<input class="form-control" type="text" value="{{ address.street }}" disabled>
+							</div>
+							<div class="col-12 col-lg-2">
+								<input class="form-control" type="text" value="{{ address.zipcode }}" disabled>
+							</div>
+							<div class="col-12 col-lg-3">
+								<input class="form-control" type="text" value="{{ address.city }}" disabled>
+							</div>
+							<div class="col-12 col-lg-2 mb-3">
+								<input class="form-control" type="text" value="{{ address.country }}" disabled>
+							</div>
+
+						{% endfor %}
 					{% endif %}
-					<div class="col-12 text-center">
+					<div class="col-12 text-center my-5">
 						<a class="btn btn-warning" href="{{ path("userProfileUpdateForm") }}">Modifier</a>
 					</div>
 				</div>

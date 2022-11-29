@@ -4,27 +4,40 @@
 {% endblock %}
 
 {% block body %}
+	<nav class="m-3 breadcrumb-margin" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a href="{{ path("home") }}">Accueil</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a href="{{ path("userProfile") }}">Profil</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a>Modifier vos information</a>
+			</li>
+		</ol>
+	</nav>
 	<div class="container">
-		<h1 class="my-5 text-center">Modifier vos information personnelle</h1>
+		<h1 class="mb-5 text-center">Modifier vos information personnelle</h1>
 
 		<form action="{{ path("userProfileUpdate") }}" method="POST" class="row gy-3 mt-4">
-			<div class="col-6">
+			<div class="col-12 col-lg-6">
 				<label for="email" class="form-label">Adresse E-mail:</label>
 				<input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" value="{{ app.user.email }}">
 			</div>
-			<div class="col-6">
+			<div class="col-12 col-lg-6">
 				<label for="birthDate" class="form-label">Date de naissance:</label>
-				<input type="date" class="form-control" id="birthDate" name="birthDate" value="{{ app.user.birthDate|date("Y-m-d") }}">
+				<input type="date" class="form-control" id="birthDate" name="birthDate" value="{{ app.user.birthDate|date("Y-m-d") }}" min="1900-01-01" max="2020-01-01">
 			</div>
-			<div class="col-6">
+			<div class="col-12 col-lg-6">
 				<label for="firstName" class="form-label">Prénom:</label>
 				<input type="text" class="form-control" id="firstName" name="firstName" placeholder="John" value="{{ app.user.firstName }}">
 			</div>
-			<div class="col-6">
+			<div class="col-12 col-lg-6">
 				<label for="lastName" class="form-label">Nom:</label>
 				<input type="text" class="form-control" id="lastName" name="lastName" placeholder="Doe" value="{{ app.user.lastName }}">
 			</div>
-			<div class="col-6">
+			<div class="col-12 col-lg-6">
 				<label for="phone" class="form-label">Numero de téléphone:</label>
 				<input type="text" class="form-control" id="phone" name="phone" placeholder="06.12.34.56.78" value="{{ app.user.phoneNumber }}">
 			</div>
@@ -32,58 +45,67 @@
 			<div class="col-12 mt-5 border-bottom">
 				<span class="fs-3">Adresses:</span>
 			</div>
-			{% for address in app.user.addresses %}
-				<div class="col-4">
-					<input class="form-control" type="text" value="{{ address.street }}" name="streets[]">
+			{% for index, address in app.user.addresses %}
+				<div class="col-12 col-lg-2">
+					<input class="form-control" type="text" value="{{ address.number }}" disabled>
 				</div>
-				<div class="col-1">
-					<input class="form-control" type="text" value="{{ address.zipcode }}" name="zipcode[]">
+				<div class="col-12 col-lg-3">
+					<input class="form-control" type="text" value="{{ address.street }}" disabled>
 				</div>
-				<div class="col-3">
-					<input class="form-control" type="text" value="{{ address.city }}" name="city[]">
+				<div class="col-12 col-lg-2">
+					<input class="form-control" type="text" value="{{ address.zipcode }}" disabled>
 				</div>
-				<div class="col-2">
-					<input class="form-control" type="text" value="{{ address.country }}" name="country[]">
+				<div class="col-12 col-lg-2">
+					<input class="form-control" type="text" value="{{ address.city }}" disabled>
 				</div>
-				<div class="col-2">
-					<button class="btn btn-primary">
+				<div class="col-12 col-lg-2">
+					<input class="form-control" type="text" value="{{ address.country }}" disabled>
+				</div>
+				<div class="col-12 col-lg-1">
+					<a href="{{ path("addressDelete", {address: index}) }}" class="btn btn-primary w-100 w-lg-auto">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-journal-minus" viewbox="0 0 16 16">
 							<path fill-rule="evenodd" d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
 							<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
 							<path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
 						</svg>
-					</button>
+					</a>
 				</div>
+
+				{#<div class="col-12 my-5 border-top"></div>#}
 			{% endfor %}
 
-			<div class="col-2">
-				<input class="form-control" type="text" name="streets[]" placeholder="Numero de voie">
+			<div class="col-12 col-lg-2">
+				<input class="form-control" type="text" name="number" id="number" placeholder="Numero de voie">
 			</div>
-			<div class="col-3">
-				<input class="form-control" type="text" name="streets[]" placeholder="Rue, Allée, Avenue...">
+			<div class="col-12 col-lg-3">
+				<input class="form-control" type="text" name="street" id="street" placeholder="Rue, Allée, Avenue...">
 			</div>
-			<div class="col-2">
-				<input class="form-control" type="text" name="zipcode[]" placeholder="Code postal">
+			<div class="col-12 col-lg-2">
+				<input class="form-control" type="text" name="zipcode" id="zipcode" placeholder="Code postal">
 			</div>
-			<div class="col-2">
-				<input class="form-control" type="text" name="city[]" placeholder="Ville">
+			<div class="col-12 col-lg-2">
+				<input class="form-control" type="text" name="city" id="city" placeholder="Ville">
 			</div>
-			<div class="col-2">
-				<input class="form-control" type="text" name="country[]" placeholder="Pays">
+			<div class="col-12 col-lg-2">
+				<input class="form-control" type="text" name="country" id="country" placeholder="Pays">
 			</div>
-			<div class="col-1">
-				<button class="btn btn-primary">
+			<div class="col-12 col-lg-1">
+				<button class="btn btn-primary w-100 w-lg-auto" id="addressAdd">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-journal-plus" viewbox="0 0 16 16">
 						<path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"/>
 						<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
 						<path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
 					</svg>
 				</button>
-			</div>
 
-			<div class="col-12 text-center">
-				<input type="submit" class="btn btn-warning" value="Modifier">
+			</div>
+			<span id="address-error" class="text-danger fs-6 d-none">Veuillez completez tous les champs</span>
+
+			<div class="col-12 text-center my-5">
+				<input type="submit" class="btn btn-success" value="Sauvegarder">
+				<input type="submit" class="btn btn-warning" value="Retour">
 			</div>
 		</form>
 	</div>
-</div>{% endblock %}
+</div>{% endblock %}{% block javascripts %}
+<script src="/js/address.js"></script>{% endblock %}

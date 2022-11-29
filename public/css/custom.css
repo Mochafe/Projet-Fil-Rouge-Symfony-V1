@@ -80,8 +80,25 @@
     width: fit-content !important;
 }
 
+.container {
+    margin-top: 150px !important;
+}
+
+.breadcrumb-margin {
+    margin-top: 130px !important;
+}
+
 @media screen and (min-width: 768px) {
     .md-w-fit {
         width: fit-content !important;
+    }
+    .w-md-auto {
+        width: auto !important;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .w-lg-auto {
+        width: auto !important;
     }
 }

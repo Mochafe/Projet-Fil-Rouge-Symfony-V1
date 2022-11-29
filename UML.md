@@ -9,6 +9,8 @@ zipcode
 city
 user
 createdAt
+updatedAt
+number
 }
 
 class Cart{
@@ -61,6 +63,13 @@ cartDetails
 
 Product -- Image
 Product -- CartDetail
+class Professional{
+PK - id
+companyName
+duns
+user
+}
+
 class User{
 PK - id
 email
@@ -79,12 +88,5 @@ addresses
 }
 
 User -- Address
-class Professional{
-PK - id
-companyName
-duns
-user
-}
-
 
 ```

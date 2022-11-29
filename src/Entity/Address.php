@@ -2,13 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\AddressRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AddressRepository;
 
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
 class Address
 {
+    function __construct() {
+        $this->setCreatedAt(new DateTime());
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -35,6 +40,9 @@ class Address
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
+
+    #[ORM\Column(length: 10)]
+    private ?string $number = null;
 
     public function getId(): ?int
     {
@@ -121,6 +129,18 @@ class Address
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getNumber(): ?string
+    {
+        return $this->number;
+    }
+
+    public function setNumber(string $number): self
+    {
+        $this->number = $number;
 
         return $this;
     }
