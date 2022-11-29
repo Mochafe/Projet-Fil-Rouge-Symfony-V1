@@ -140,11 +140,6 @@ class OrderController extends AbstractController
         $addressRepository->save($billingAddress);
 
         
-
-        
-
-
-
         $order = new Order();
         $order->setUser($user);
         $order->setBillingAddress($billingAddress);

@@ -67,7 +67,7 @@ class CartController extends AbstractController
     }
 
     #[Route('/add/{product}', name: 'Add', methods: ["POST"])]
-    public function add(Request $request, ProductRepository $productRepository, CartDetailRepository $cartDetailRepository, CartRepository $cartRepository, Product $product): Response
+    public function add(Request $request, CartDetailRepository $cartDetailRepository, CartRepository $cartRepository, Product $product): Response
     {
         if (!isset($product)) {
             $this->addFlash("error", "Le produit n'existe pas");
