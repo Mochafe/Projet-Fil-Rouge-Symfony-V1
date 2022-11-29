@@ -171,7 +171,7 @@ class OrderController extends AbstractController
         $orderRepository->save($order, true);
 
         
-
+        $this->addFlash("success", "Votre commande a était confirmé");
         return $this->redirectToRoute("orderView");
     }
 }
