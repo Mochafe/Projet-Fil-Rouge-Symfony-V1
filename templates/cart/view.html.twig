@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container mt-5">
+	<div class="container mt-5 container-margin">
 		<h1 class="text-center">Panier</h1>
 
 		<div class="row mt-5">
@@ -43,7 +43,7 @@
 				</div>
 
 				<div class="col-12 my-5">
-					<a class="btn btn-primary col-12" href="">Commander</a>
+					<a class="btn btn-primary col-12" href="{{ path("orderValidate") }}">Commander</a>
 				</div>
 			</div>
 		</div>

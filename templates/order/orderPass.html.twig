@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement
+{% endblock %}
+
+{% block body %}
+	<div class="container my-5 container-margin">
+		<h1 class="text-center">Procéder au paiement</h1>
+		<div class="row gy-3 mt-4">
+			<div class="col-12 col-lg-6">
+				<label for="firstName" class="form-label">Prénom:</label>
+				<input type="text" class="form-control" id="firstName" placeholder="name@example.com" value="{{ app.user.firstName }}">
+			</div>
+			<div class="col-12 col-lg-6">
+				<label for="lastName" class="form-label">Nom:</label>
+				<input type="text" class="form-control" id="lastName" placeholder="name@example.com" value="{{ app.user.lastName }}">
+			</div>
+
+			<div class="col-12">
+				Adresse de livraison:
+			</div>
+
+
+			{% if app.user.addresses|length > 0 %}
+				<div class="col-12 col-lg-2">
+					<input class="form-control" type="text" value="{{ app.user.addresses[0].number }}" placeholder="Numero de voie">
+				</div>
+				<div class="col-12 col-lg-3">
+					<input class="form-control" type="text" value="{{ app.user.addresses[0].street }}" placeholder="Rue, Allée, Avenue...">
+				</div>
+				<div class="col-12 col-lg-2">
+					<input class="form-control" type="text" value="{{ app.user.addresses[0].zipcode }}" placeholder="Code postal">
+				</div>
+				<div class="col-12 col-lg-3">
+					<input class="form-control" type="text" value="{{ app.user.addresses[0].city }}" placeholder="Ville">
+				</div>
+				<div class="col-12 col-lg-2 mb-3">
+					<input class="form-control" type="text" value="{{ app.user.addresses[0].country }}" placeholder="Pays">
+				</div>
+			{% else %}
+				<div class="col-12 col-lg-2">
+					<input class="form-control" type="text" name="number" placeholder="Numero de voie">
+				</div>
+				<div class="col-12 col-lg-3">
+					<input class="form-control" type="text" name="street" placeholder="Rue, Allée, Avenue...">
+				</div>
+				<div class="col-12 col-lg-2">
+					<input class="form-control" type="text" name="zipcode" placeholder="Code postal">
+				</div>
+				<div class="col-12 col-lg-3">
+					<input class="form-control" type="text" name="city" placeholder="Ville">
+				</div>
+				<div class="col-12 col-lg-2 mb-3">
+					<input class="form-control" type="text" name="country" placeholder="Pays">
+				</div>
+			{% endif %}
+
+
+			<div class="col-12">
+				Adresse de facturation:
+			</div>
+
+
+			{% if app.user.addresses|length > 0 %}
+				<div class="col-12 col-lg-2">
+					<input class="form-control" type="text" value="{{ app.user.addresses[0].number }}" placeholder="Numero de voie">
+				</div>
+				<div class="col-12 col-lg-3">
+					<input class="form-control" type="text" value="{{ app.user.addresses[0].street }}" placeholder="Rue, Allée, Avenue...">
+				</div>
+				<div class="col-12 col-lg-2">
+					<input class="form-control" type="text" value="{{ app.user.addresses[0].zipcode }}" placeholder="Code postal">
+				</div>
+				<div class="col-12 col-lg-3">
+					<input class="form-control" type="text" value="{{ app.user.addresses[0].city }}" placeholder="Ville">
+				</div>
+				<div class="col-12 col-lg-2 mb-3">
+					<input class="form-control" type="text" value="{{ app.user.addresses[0].country }}" placeholder="Pays">
+				</div>
+			{% else %}
+				<div class="col-12 col-lg-2">
+					<input class="form-control" type="text" name="number" placeholder="Numero de voie">
+				</div>
+				<div class="col-12 col-lg-3">
+					<input class="form-control" type="text" name="street" placeholder="Rue, Allée, Avenue...">
+				</div>
+				<div class="col-12 col-lg-2">
+					<input class="form-control" type="text" name="zipcode" placeholder="Code postal">
+				</div>
+				<div class="col-12 col-lg-3">
+					<input class="form-control" type="text" name="city" placeholder="Ville">
+				</div>
+				<div class="col-12 col-lg-2 mb-3">
+					<input class="form-control" type="text" name="country" placeholder="Pays">
+				</div>
+			{% endif %}
+
+
+			<div class="col-12">
+				<label for="payment">Moyen de paiement</label>
+				<select class="form-control" name="payment" id="payment">
+					<option value="" selected>Selectionner un moyen de paiement</option>
+					<option value="card">Carte bleu</option>
+				</select>
+			</div>
+			<div class="col-12">
+				<label for="card-owner">Titulaire de la carte</label>
+				<input id="card-owner" type="text" class="form-control" value="{{ app.user.firstName }} {{ app.user.lastName }}" placeholder="John Doe">
+			</div>
+
+			<div class="col-6">
+				<label for="card-number">Numero de carte:</label>
+				<input id="card-number" type="text" class="form-control">
+			</div>
+			<div class="col-3">
+				<label for="card-number">Code CVV:</label>
+				<input id="card-number" type="text" class="form-control" minlength="3" maxlength="3" pattern="\d{3}">
+			</div>
+			<div class="col-3">
+				<label for="card-number">Date d'expiration:</label>
+				<input id="card-number" type="month" class="form-control">
+			</div>
+
+			<div class="col-12">
+				<input class="btn btn-primary w-100" type="submit" value="Payer">
+			</div>
+
+		</div>
+	</div>
+{% endblock %}
