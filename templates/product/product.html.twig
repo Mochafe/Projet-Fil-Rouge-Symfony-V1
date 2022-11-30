@@ -39,7 +39,7 @@
 					<div class="carousel-inner">
 						{% if product.images|length > 0 %}
 							{% for index, image in product.images %}
-								<div class="carousel-item {% if index == 0 %} active {% endif %}">
+								<div class="carousel-item {% if index == 0 %} active {% endif %}" data-bs-interval="false">
 									<img src="{{ image.path }}" class="d-block product-img mx-auto" alt="{{ image.title }}">
 								</div>
 							{% endfor %}
