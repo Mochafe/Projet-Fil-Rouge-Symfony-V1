@@ -11,40 +11,127 @@
 				<button class="nav-link active" id="commands-tab" data-bs-toggle="tab" data-bs-target="#commands-tab-pane" type="button" role="tab" aria-controls="commands-tab-pane" aria-selected="true">Commandes</button>
 			</li>
 			<li class="nav-item" role="presentation">
-				<button class="nav-link" id="past-tab" data-bs-toggle="tab" data-bs-target="#past-tab-pane" type="button" role="tab" aria-controls="past-tab-pane" aria-selected="false">Historique des commandes</button>
+				<button class="nav-link" id="past-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Historique des commandes</button>
 			</li>
 
 		</ul>
-		<div class="tab-content" id="commandsContent">
-			<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-			<div class="row">
-				{% for order in app.user.orders %}
-					<div class="col-12 mt-3">
-					{% for orderDetail in order.orderDetails %}
-								<div class="card p-2 flex-row">
-									<div class="d-flex flex-column col-3 ms-5">
-										{% if order.product.images|length > 0 %}
-											<img src="{{ order.product.images[0].path }}" class="mx-auto cart-img" alt="{{ order.product.images[0].title }}">
-										{% else %}
-											<img src="/img/placeholder.png" class="mx-auto cart-img" alt="placeholder">
-										{% endif %}
-									</div>
-									<div class="card-body">
-										<h5 class="card-title text-center">{{ order.product.name }}</h5>
-										<p name="prices" class="card-text text-center">{{ order.product.price * order.quantity }}€</p>
+		<div class="tab-content mt-3" id="commandsContent">
+			<div class="tab-pane fade show active" id="commands-tab-pane" role="tabpanel" aria-labelledby="commands-tab" tabindex="0">
+				<div class="accordion" id="orderAccordion">
+					{% for index, order in app.user.orders %}
+						{% if order.received == false %}
+							<div class="accordion-item mt-3">
+								<h2 class="accordion-header" id="panelsStayOpen-heading{{ index }}">
+									<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ index }}" aria-expanded="true" aria-controls="panelsStayOpen-collapse{{ index }}">
+										Commande du n°{{ order.id }}
+										({{ order.createAt|date("Y-d-m") }})
+										{% if order.shipped %}
+											<div class="d-flex ms-auto me-0 text-success">
+												<span>Envoyé<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box" viewbox="0 0 16 16">
+															<path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+														</svg>
+													</div>
+												{% endif %}
+											</button>
+										</h2>
+										<div id="panelsStayOpen-collapse{{ index }}" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading{{ index }}">
+											<div class="accordion-body">
 
-										<div class="d-flex my-5 justify-content-center">
-											<input class="form-control h-50 w-25" type="number" name="quantity" id="quantity" data-price={{ order.product.price }} data-id={{ order.id }} value="{{ cartDetail.quantity }}" min="1" disabled>
+												{% set tot = 0 %}
+												{% for orderDetail in order.orderDetails %}
+													{% set tot = tot + orderDetail.product.price * orderDetail.quantity - orderDetail.discount %}
+													<div class="col-12 mt-3">
+														<div class="card p-2 mt-3 flex-row w-100">
+															<div class="d-flex flex-column col-3 ms-5">
+																{% if orderDetail.product.images|length > 0 %}
+																	<img src="{{ orderDetail.product.images[0].path }}" class="mx-auto cart-img" alt="{{ orderDetail.product.images[0].title }}">
+																{% else %}
+																	<img src="/img/placeholder.png" class="mx-auto cart-img" alt="placeholder">
+																{% endif %}
+															</div>
+															<div class="card-body">
+																<h5 class="card-title text-center">{{ orderDetail.product.name }}</h5>
+																<p name="prices" class="card-text text-center">{{ orderDetail.product.price * orderDetail.quantity }}€</p>
+
+																<div class="d-flex my-5 justify-content-center">
+																	<input class="form-control h-50 w-25" type="number" name="quantity" id="quantity" data-price={{ orderDetail.product.price }} data-id={{ orderDetail.id }} value="{{ orderDetail.quantity }}" min="1" disabled>
+																</div>
+																<div></div>
+															</div>
+														</div>
+
+													</div>
+												{% endfor %}
+												<div class="text-center mt-3 fs-2">Total:
+													{{ tot }}
+													€</div>
+											</div>
 										</div>
 									</div>
-								</div>
-								
-							</div>
-				{% endfor %}
-			</div>
-			</div>
-			<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
-		</div>
+								{% endif %}
+							{% endfor %}
+						</div>
 
-	</div>
-{% endblock %}
+					</div>
+					<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+						<div class="accordion" id="orderAccordion">
+							{% for index, order in app.user.orders %}
+								{% if order.received == true %}
+									<div class="accordion-item">
+										<h2 class="accordion-header" id="panelsStayOpen-heading{{ index }}">
+											<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ index }}" aria-expanded="true" aria-controls="panelsStayOpen-collapse{{ index }}">
+												Commande du n°{{ order.id }}
+												({{ order.createAt|date("Y-d-m") }})
+												{% if order.shipped %}
+													<div class="d-flex ms-auto me-0 text-success">
+														<span>Reçu<span>
+																<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-fill" viewbox="0 0 16 16">
+																	<path fill-rule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.004-.001.274-.11a.75.75 0 0 1 .558 0l.274.11.004.001 6.971 2.789Zm-1.374.527L8 5.962 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339Z"/>
+																</svg>
+															</div>
+														{% endif %}
+													</button>
+												</h2>
+												<div id="panelsStayOpen-collapse{{ index }}" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading{{ index }}">
+													<div class="accordion-body">
+
+														{% set tot = 0 %}
+														{% for orderDetail in order.orderDetails %}
+															{% set tot = tot + orderDetail.product.price * orderDetail.quantity - orderDetail.discount %}
+															<div class="col-12 mt-3">
+																<div class="card p-2 mt-3 flex-row w-100">
+																	<div class="d-flex flex-column col-3 ms-5">
+																		{% if orderDetail.product.images|length > 0 %}
+																			<img src="{{ orderDetail.product.images[0].path }}" class="mx-auto cart-img" alt="{{ orderDetail.product.images[0].title }}">
+																		{% else %}
+																			<img src="/img/placeholder.png" class="mx-auto cart-img" alt="placeholder">
+																		{% endif %}
+																	</div>
+																	<div class="card-body">
+																		<h5 class="card-title text-center">{{ orderDetail.product.name }}</h5>
+																		<p name="prices" class="card-text text-center">{{ orderDetail.product.price * orderDetail.quantity }}€</p>
+
+																		<div class="d-flex my-5 justify-content-center">
+																			<input class="form-control h-50 w-25" type="number" name="quantity" id="quantity" data-price={{ orderDetail.product.price }} data-id={{ orderDetail.id }} value="{{ orderDetail.quantity }}" min="1" disabled>
+																		</div>
+																		<div></div>
+																	</div>
+																</div>
+
+															</div>
+														{% endfor %}
+														<div class="text-center mt-3 fs-2">Total:
+															{{ tot }}
+															€</div>
+													</div>
+												</div>
+											</div>
+										{% endif %}
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endblock %}

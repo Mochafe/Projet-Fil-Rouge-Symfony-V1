@@ -16,6 +16,7 @@ class Order
     function __construct() {
         $this->createAt = new DateTime();
         $this->shipped = false;
+        $this->received = false;
         $this->orderDetails = new ArrayCollection();
     }
 
@@ -46,6 +47,9 @@ class Order
 
     #[ORM\OneToMany(mappedBy: 'orderUser', targetEntity: OrderDetail::class)]
     private Collection $orderDetails;
+
+    #[ORM\Column]
+    private ?bool $received = null;
 
     public function getId(): ?int
     {
@@ -151,6 +155,18 @@ class Order
                 $orderDetail->setOrderUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isReceived(): ?bool
+    {
+        return $this->received;
+    }
+
+    public function setReceived(bool $received): self
+    {
+        $this->received = $received;
 
         return $this;
     }

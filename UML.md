@@ -29,6 +29,18 @@ product
 quantity
 }
 
+class Category{
+PK - id
+name
+image
+parent
+childs
+products
+}
+
+Category -- self
+Category -- self
+Category -- Product
 class Image{
 PK - id
 path
@@ -44,23 +56,17 @@ paymentMethod
 billingAddress
 deliveryAddress
 user
+orderDetails
+received
 }
 
-class Category{
-PK - id
-name
-image
-parent
-childs
-products
-}
-
-Category -- self
-Category -- self
-Category -- Product
+Order -- OrderDetail
 class OrderDetail{
 PK - id
 product
+quantity
+discount
+orderUser
 }
 
 class Product{
