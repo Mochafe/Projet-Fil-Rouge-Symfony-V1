@@ -98,7 +98,7 @@
     max-height: 30vh;
 
     top: 75px;
-    left: 23.2vw;
+    left: 23%;
 
     border: 1px solid darkgray;
 
@@ -107,9 +107,6 @@
 
 }
 
-.pointer:hover {
-    cursor: pointer;
-}
 
 @media screen and (min-width: 768px) {
     .md-w-fit {
