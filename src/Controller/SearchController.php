@@ -17,15 +17,18 @@ class SearchController extends AbstractController
 
         $productResponse = array();
 
+        //dd(strtolower($request->query->get("search")));
+
+
         foreach($products as $product) {
-            if(strpos($product->getName() ,$request->query->get("search"))) {
-                $productBuff = `{
-                    "name" => ` . $product->getName() . `
-                },`;              
-                $productResponse[] = $productBuff;
+        
+            if(strpos(strtolower($product->getName()), strtolower($request->query->get("search"))) !== false) {             
+                $productResponse[] = [
+                    "id" => $product->getId(),
+                    "name" => $product->getName()
+                ];
             }
         }
-
 
         return new Response(\json_encode($productResponse));
     }
