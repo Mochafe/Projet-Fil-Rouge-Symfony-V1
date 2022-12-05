@@ -57,6 +57,7 @@
 				</div>
 				<div class="col-12 col-lg-2">
 					<input class="form-control" type="text" value="{{ address.city }}" disabled>
+					
 				</div>
 				<div class="col-12 col-lg-2">
 					<input class="form-control" type="text" value="{{ address.country }}" disabled>
@@ -84,7 +85,8 @@
 				<input class="form-control" type="text" name="zipcode" id="zipcode" placeholder="Code postal">
 			</div>
 			<div class="col-12 col-lg-2">
-				<input class="form-control" type="text" name="city" id="city" placeholder="Ville">
+				<input class="form-control" type="text" list="city-datalist" name="city" id="city" placeholder="Ville">
+				<datalist id="city-datalist"></datalist>
 			</div>
 			<div class="col-12 col-lg-2">
 				<input class="form-control" type="text" name="country" id="country" placeholder="Pays">
@@ -107,5 +109,7 @@
 			</div>
 		</form>
 	</div>
-</div>{% endblock %}{% block javascripts %}
-<script src="/js/address.js"></script>{% endblock %}
+</div>
+{% endblock %}{% block javascripts %}
+<script src="/js/address.js"></script>
+{% endblock %}

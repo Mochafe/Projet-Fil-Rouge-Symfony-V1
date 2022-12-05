@@ -3,8 +3,22 @@ const number = document.getElementById("number");
 const street = document.getElementById("street");
 const zipcode = document.getElementById("zipcode");
 const city = document.getElementById("city");
+const cityDataList = document.getElementById("city-datalist");
 const country = document.getElementById("country");
 const addressError = document.getElementById("address-error");
+
+const urlApi = "https://apicarto.ign.fr/api/codes-postaux/communes/";
+
+zipcode.addEventListener("keyup", () => {
+    fetch(urlApi + zipcode.value.trim()).then(response => {
+        response.json().then(json => {
+            cityDataList.innerHTML = "";
+            for(let i = 0; i < json.length; i++) {
+                cityDataList.innerHTML += `<option value="${json[i].nomCommune}">`;
+            }
+        });
+    });
+});
 
 
 addressAdd.addEventListener("click", (event) => {
