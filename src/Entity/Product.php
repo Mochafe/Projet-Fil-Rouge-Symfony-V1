@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     paginationItemsPerPage: 30
 )]
 #[ApiFilter(RangeFilter::class, properties: ["price"])]
-#[ApiFilter(SearchFilter::class, properties: ["category" => "exact", "name" => "partial"])]
+#[ApiFilter(SearchFilter::class, properties: ["category" => "exact", "name" => "partial", "reference" => "exact"])]
 class Product
 {
     #[ORM\Id]

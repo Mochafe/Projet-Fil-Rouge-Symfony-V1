@@ -8,11 +8,16 @@ use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Annotation\ApiFilter;
+
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ApiResource(
     normalizationContext: ['groups' => ['read:category']],
 )]
+#[ApiFilter(SearchFilter::class, properties: ["parent" => "exact"])]
+
 class Category
 {
     #[ORM\Id]
@@ -30,6 +35,7 @@ class Category
     private ?Image $image = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'childs')]
+    #[Groups(["read:category"])]
     private ?self $parent = null;
 
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
