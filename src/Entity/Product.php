@@ -14,6 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ApiResource(
     normalizationContext: ['groups' => ['read:product']],
+    paginationItemsPerPage: 30
 )]
 class Product
 {
@@ -59,7 +60,7 @@ class Product
     #[Groups(["read:product"])]
     private array $content = [];
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Image::class)]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Image::class, cascade:["persist", "remove"], orphanRemoval: true)]
     #[Groups(["read:product"])]
     private Collection $images;
 
