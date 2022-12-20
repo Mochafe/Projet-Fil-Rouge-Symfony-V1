@@ -22,7 +22,9 @@
 		<header>
 			{% include "component/navbar.html.twig" %}
 		</header>
+		<main>
 		{% block body %}{% endblock %}
+		</main>
 
 
 		{% for message in app.flashes('success') %}
