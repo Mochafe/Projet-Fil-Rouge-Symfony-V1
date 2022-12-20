@@ -15,13 +15,6 @@ orders
 }
 
 Address -- Order
-class CartDetail{
-PK - id
-cart
-product
-quantity
-}
-
 class Cart{
 PK - id
 user
@@ -29,6 +22,13 @@ cartDetails
 }
 
 Cart -- CartDetail
+class CartDetail{
+PK - id
+cart
+product
+quantity
+}
+
 class Category{
 PK - id
 name

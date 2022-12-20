@@ -158,6 +158,8 @@ class AppFixtures extends Fixture
         $cTradition->setImage($itradition);
         $manager->persist($cTradition); 
 
+        
+
         $manager->flush();
     }
 }
