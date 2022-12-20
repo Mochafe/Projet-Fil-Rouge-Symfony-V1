@@ -146,6 +146,18 @@ class AppFixtures extends Fixture
         $pGuitarClassic->setCategory($cGuitarClassic);
         $manager->persist($pGuitarClassic);
 
+
+        $cTradition = new Category();
+        $cTradition->setName("Instruments Traditionnels");
+
+        $itradition = new Image();
+        $itradition->setTitle("Image de violon");
+        $itradition->setPath("/img/category/tradition.webp");
+        $manager->persist($itradition);
+
+        $cTradition->setImage($itradition);
+        $manager->persist($cTradition); 
+
         $manager->flush();
     }
 }

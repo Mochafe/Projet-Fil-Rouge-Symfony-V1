@@ -3,50 +3,64 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
-use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read:product']],
+)]
 class Product
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["read:product"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(["read:product"])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(["read:product"])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::GUID)]
+    #[Groups(["read:product"])]
     private ?string $reference = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[Groups(["read:product"])]
     private ?string $price = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    #[Groups(["read:product"])]
     private ?string $discount = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2, nullable: true)]
+    #[Groups(["read:product"])]
     private ?string $discountRate = null;
 
     #[ORM\Column]
+    #[Groups(["read:product"])]
     private ?int $quantity = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
+    #[Groups(["read:product"])]
     private ?Category $category = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(["read:product"])]
     private array $content = [];
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Image::class)]
+    #[Groups(["read:product"])]
     private Collection $images;
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: CartDetail::class)]
