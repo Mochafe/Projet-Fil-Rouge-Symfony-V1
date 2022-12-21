@@ -5,13 +5,21 @@ namespace App\Entity;
 use App\Repository\OrderDetailRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiResource;
+
 
 #[ORM\Entity(repositoryClass: OrderDetailRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read:orderDetail']],
+    paginationItemsPerPage: 30
+)]
 class OrderDetail
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["read:product"])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'orderDetails')]
@@ -19,6 +27,7 @@ class OrderDetail
     private ?Product $product = null;
 
     #[ORM\Column]
+    #[Groups(["read:product"])]
     private ?int $quantity = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]

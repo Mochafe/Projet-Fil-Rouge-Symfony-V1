@@ -4,13 +4,20 @@ namespace App\Entity;
 
 use App\Repository\CartDetailRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 #[ORM\Entity(repositoryClass: CartDetailRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read:orderDetail']],
+    paginationItemsPerPage: 30
+)]
 class CartDetail
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["read:product"])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'cartDetails')]
@@ -21,6 +28,7 @@ class CartDetail
     private ?Product $product = null;
 
     #[ORM\Column]
+    #[Groups(["read:product"])]
     private ?int $quantity = null;
 
     public function getId(): ?int

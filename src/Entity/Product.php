@@ -68,10 +68,12 @@ class Product
     #[Groups(["read:product"])]
     private Collection $images;
 
+    #[Groups(["read:product"])]
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: CartDetail::class)]
     private Collection $cartDetails;
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderDetail::class)]
+    #[Groups(["read:product"])]
     private Collection $orderDetails;
 
     public function __construct()
