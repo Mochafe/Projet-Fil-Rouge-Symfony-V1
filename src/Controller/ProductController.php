@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -26,5 +27,12 @@ class ProductController extends AbstractController
         return $this->render('product/products.html.twig', [
             "products" => $productRepository->findAll()
         ]);
+    }
+
+    #[Route('/new', methods:["POST"])]
+    public function new(Request $request): Response {
+
+        var_dump($request);
+        return new Response("");
     }
 }
