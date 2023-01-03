@@ -2,20 +2,22 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiFilter;
-use App\Repository\ProductRepository;
-use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProductRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ApiResource(
     normalizationContext: ['groups' => ['read:product']],
+    denormalizationContext: ['groups' => ['write:product']],
     paginationItemsPerPage: 30
 )]
 #[ApiFilter(RangeFilter::class, properties: ["price"])]
@@ -29,11 +31,11 @@ class Product
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(["read:product"])]
+    #[Groups(["read:product", "write:product"])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(["read:product"])]
+    #[Groups(["read:product", "write:product"])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::GUID)]
@@ -41,31 +43,31 @@ class Product
     private ?string $reference = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    #[Groups(["read:product"])]
+    #[Groups(["read:product", "write:product"])]
     private ?string $price = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
-    #[Groups(["read:product"])]
+    #[Groups(["read:product", "write:product"])]
     private ?string $discount = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2, nullable: true)]
-    #[Groups(["read:product"])]
+    #[Groups(["read:product", "write:product"])]
     private ?string $discountRate = null;
 
     #[ORM\Column]
-    #[Groups(["read:product"])]
+    #[Groups(["read:product", "write:product"])]
     private ?int $quantity = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
-    #[Groups(["read:product"])]
+    #[Groups(["read:product", "write:product"])]
     private ?Category $category = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(["read:product"])]
+    #[Groups(["read:product", "write:product"])]
     private array $content = [];
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Image::class, cascade:["persist", "remove"], orphanRemoval: true)]
-    #[Groups(["read:product"])]
+    #[Groups(["read:product", "write:product"])]
     private Collection $images;
 
     #[Groups(["read:product"])]
@@ -81,6 +83,7 @@ class Product
         $this->images = new ArrayCollection();
         $this->cartDetails = new ArrayCollection();
         $this->orderDetails = new ArrayCollection();
+        $this->reference = Uuid::v4();
     }
 
     public function getId(): ?int
