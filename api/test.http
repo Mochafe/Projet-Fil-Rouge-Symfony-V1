@@ -1,0 +1,66 @@
+POST http://127.0.0.1:8000/api/products
+content-type: application/json
+
+{
+  "name": "string",
+  "description": "string",
+  "price": "12.33",
+  "discount": null,
+  "discountRate": null,
+  "quantity": 0,
+  "category": "/api/categories/4"
+  
+}
+
+
+###
+
+
+GET http://127.0.0.1:8000/api/categories
+Accept: application/json
+
+###
+
+
+GET http://127.0.0.1:8000/api/products/15
+
+###
+
+PATCH http://127.0.0.1:8000/api/products/14
+Content-Type: application/merge-patch+json
+
+{
+  "name":"Modif Test 2",
+  "category":"/api/categories/3",
+  "price":"12.15",
+  "quantity":50,
+  "description":"Modif Test",
+  "content": {
+    "Référencé depuis":"Septembre 2020",
+    "Numéro d'article":"489975",
+    "Conditionnement (UVC)":"1 Pièce(s)",
+    "Couleur":"Naturel",
+    "Corps":"Tilleul",
+    "Table":"Tilleul",
+    "Manche":"Erable",
+    "Touche":"Roseacer",
+    "Frettes":"24",
+    "Diapason":"433 mm",
+    "équipement de micros":"HH",
+    "Vibrato":"Non",
+    "Etui inclu":"Non",
+    "Housse incl.":"Non",
+    "Pan coupé":"Non",
+    "Fond et éclisses":"Tilleul",
+    "Micro":"Non",
+    "Largeur au sillet en mm":"48,00 mm",
+    "Etui":"Non"
+  }
+}
+
+###
+
+GET http://127.0.0.1:8000/api/categories
+Accept: application/ld+json
+
+###

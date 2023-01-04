@@ -15,6 +15,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ApiResource(
     normalizationContext: ['groups' => ['read:category']],
+    paginationEnabled: false
 )]
 #[ApiFilter(SearchFilter::class, properties: ["parent" => "exact"])]
 
