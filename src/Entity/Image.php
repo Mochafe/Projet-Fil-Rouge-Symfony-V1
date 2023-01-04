@@ -21,11 +21,11 @@ class Image
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(["read:product"])]
+    #[Groups(["read:product", "read:category"])]
     private ?string $path = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(["read:product"])]
+    #[Groups(["read:product", "read:category"])]
     private ?string $title = null;
 
     #[ORM\ManyToOne(inversedBy: 'images')]

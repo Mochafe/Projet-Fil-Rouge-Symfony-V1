@@ -32,6 +32,7 @@ class Category
     private ?string $name = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[Groups(["read:category"])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Image $image = null;
 
