@@ -17,7 +17,7 @@ class Image
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(["read:product"])]
+    #[Groups(["read:product", "read:category"])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
