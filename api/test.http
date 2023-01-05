@@ -64,3 +64,9 @@ GET http://127.0.0.1:8000/api/categories
 Accept: application/ld+json
 
 ###
+
+DELETE http://127.0.0.1:8000/api/categories/1
+
+###
+
+GET http://127.0.0.1:8000/api/categories/3
