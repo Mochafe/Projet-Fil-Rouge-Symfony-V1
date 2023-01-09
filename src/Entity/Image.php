@@ -11,6 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 #[ApiResource(
     normalizationContext: ['groups' => ['read:image']],
+    denormalizationContext: ['groups' => ['write:image']]
 )]
 class Image
 {
@@ -21,11 +22,11 @@ class Image
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(["read:product", "read:category"])]
+    #[Groups(["read:product", "read:category", "write:image"])]
     private ?string $path = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(["read:product", "read:category"])]
+    #[Groups(["read:product", "read:category", "write:image"])]
     private ?string $title = null;
 
     #[ORM\ManyToOne(inversedBy: 'images')]
