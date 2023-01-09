@@ -4,20 +4,21 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CategoryRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
 
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ApiResource(
     normalizationContext: ['groups' => ['read:category']],
+    denormalizationContext: ['groups' => ['write:category']],
     paginationEnabled: false
 )]
-#[ApiFilter(SearchFilter::class, properties: ["parent" => "exact"])]
+#[ApiFilter(ExistsFilter::class, properties: ["parent"])]
 
 class Category
 {
@@ -28,16 +29,16 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
-    #[Groups(["read:category", "read:product"])]
+    #[Groups(["read:category", "write:category", "read:product"])]
     private ?string $name = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    #[Groups(["read:category"])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[Groups(["read:category", "write:category"])]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Image $image = null;
 
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'childs')]
-    #[Groups(["read:category"])]
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'childs')]   
+    #[Groups(["read:category", "write:category"])]
     private ?self $parent = null;
 
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
