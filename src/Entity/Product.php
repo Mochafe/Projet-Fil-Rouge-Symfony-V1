@@ -67,7 +67,6 @@ class Product
     private array $content = [];
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Image::class, cascade:["persist", "remove"], orphanRemoval: true)]
-    #[ORM\Column(nullable: true)]
     #[Groups(["read:product", "write:product"])]
     private Collection $images;
 
