@@ -14,6 +14,10 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $mcNone = new Category();
+        $mcNone->setName("Sans catégories");
+        $manager->persist($mcNone);
+
         //Categorie Guitare
         $iGuitar = new Image();
         $iGuitar->setTitle("Guitares & Basses");
