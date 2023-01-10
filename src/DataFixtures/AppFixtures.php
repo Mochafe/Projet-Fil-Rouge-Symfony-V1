@@ -15,7 +15,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $mcNone = new Category();
-        $mcNone->setName("Sans catégories");
+        $mcNone->setName("Sans catégorie");
         $manager->persist($mcNone);
 
         //Categorie Guitare
