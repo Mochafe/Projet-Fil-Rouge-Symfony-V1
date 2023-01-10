@@ -12,9 +12,18 @@ class ImageController extends AbstractController
     #[Route('/api/category_image', name: 'addCategoryImage', methods: ["POST"])]
     public function addCategoryImage(Request $request): Response
     {
-        return $this->render('image/index.html.twig', [
-            'controller_name' => 'ImageController',
-        ]);
+        $categoryImgPath = $this->getParameter('kernel.project_dir') . '/public/img/category/';
+
+        $image = $request->files->get("image");
+
+        if($image->getError() || !$image->isValid()) {
+            return new Response(\json_encode(["message" => "an error occurred"]), 409);
+        }
+
+        $image->move($categoryImgPath . "/",  $request->request->get("name") . "." . $image->getClientOriginalExtension());
+
+
+        return new Response(\json_encode(["message" => "Images uploaded"], 201));
     }
 
     #[Route('/api/product_images', name: 'addProductImages', methods: ["POST"])]
