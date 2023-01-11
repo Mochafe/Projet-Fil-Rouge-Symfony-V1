@@ -21,9 +21,13 @@ class CategoryService {
     
     //TODO main cat can't delete
     public function delete($id) {
+
         //get noCat
         $noCat = $this->categoryRepository->find(1);
+
+        // dd($noCat);
         $category = $this->categoryRepository->find($id);
+
 
         $products = $category->getProducts();
         //set product category to noCat
@@ -34,12 +38,14 @@ class CategoryService {
 
         $childs = $category->getChilds();
 
+
         foreach($childs as $child) {
             $child->setParent($noCat);
             $this->categoryRepository->save($child);
         }
 
-        $this->imageRepository->remove($category->getImage());
+    
+        $this->imageRepository->remove($category->getImage(), true);
 
         $this->categoryRepository->remove($category, true);
     
