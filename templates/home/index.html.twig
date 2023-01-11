@@ -20,16 +20,18 @@
 
 			<div class="row mt-5">
 				{% for category in categories %}
-					<div class="col-lg-3 col-ml-4 my-3 card-hover">
-						<a class="text-decoration-none" href="{{ path("categorySub", {category: category.id}) }}">
-							<div class="card p-2">
-								<img src="{{ category.image.path }}" class="mx-auto products-img" alt="{{ category.image.title }}">
-								<div class="card-body">
-									<h5 class="card-title text-center">{{ category.name }}</h5>
+					{% if category.image is not null %}
+						<div class="col-lg-3 col-ml-4 my-3 card-hover">
+							<a class="text-decoration-none" href="{{ path("categorySub", {category: category.id}) }}">
+								<div class="card p-2">
+									<img src="{{ category.image.path }}" class="mx-auto products-img" alt="{{ category.image.title }}">
+									<div class="card-body">
+										<h5 class="card-title text-center">{{ category.name }}</h5>
+									</div>
 								</div>
-							</div>
-						</a>
-					</div>
+							</a>
+						</div>
+					{% endif %}
 				{% endfor %}
 			</div>
 		</div>
