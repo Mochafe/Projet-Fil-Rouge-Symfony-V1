@@ -34,7 +34,7 @@ class Category
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[Groups(["read:category", "write:category"])]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: true, onDelete: "SET NULL")]
     private ?Image $image = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'childs')]   
