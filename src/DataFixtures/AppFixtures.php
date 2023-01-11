@@ -65,6 +65,18 @@ class AppFixtures extends Fixture
         $cGuitar->setImage($iGuitar);
         $manager->persist($cGuitar);
 
+
+        $cTradition = new Category();
+        $cTradition->setName("Instruments Traditionnels");
+
+        $itradition = new Image();
+        $itradition->setTitle("Image de violon");
+        $itradition->setPath("/img/category/tradition.webp");
+        $manager->persist($itradition);
+
+        $cTradition->setImage($itradition);
+        $manager->persist($cTradition);
+
         for ($i = 0; $i < 99; $i++) {
 
             $pGuitar = new Product();
@@ -157,16 +169,7 @@ class AppFixtures extends Fixture
 
         }
 
-        $cTradition = new Category();
-        $cTradition->setName("Instruments Traditionnels");
-
-        $itradition = new Image();
-        $itradition->setTitle("Image de violon");
-        $itradition->setPath("/img/category/tradition.webp");
-        $manager->persist($itradition);
-
-        $cTradition->setImage($itradition);
-        $manager->persist($cTradition);
+        
 
 
 
