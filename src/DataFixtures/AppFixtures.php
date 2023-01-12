@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Image;
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Entity\Supplier;
 use Symfony\Component\Uid\Uuid;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -66,6 +67,7 @@ class AppFixtures extends Fixture
         $manager->persist($cGuitar);
 
 
+        //Instrument Traditionnel
         $cTradition = new Category();
         $cTradition->setName("Instruments Traditionnels");
 
@@ -77,13 +79,25 @@ class AppFixtures extends Fixture
         $cTradition->setImage($itradition);
         $manager->persist($cTradition);
 
+        //Supplier
+        //Harley benton
+        $sHarley = new Supplier();
+        $sHarley->setName("Harley Benton");
+        $manager->persist($sHarley);
+
+        //Startone
+        $sStartone = new Supplier();
+        $sStartone->setName("Startone");
+        $manager->persist($sStartone);
+
         for ($i = 0; $i < 99; $i++) {
 
             $pGuitar = new Product();
-            $pGuitar->setName("Harley Benton R-458MN WH Fanfret");
-            $pGuitar->setDescription("## Guitare éléctrique\n\n- 8 cordes\n- Série Progressive\n- Corps en tilleul\n- Profil du manche: Speed D\n- Manche vissé en érable\n- Touche en érable\n- Repères \"points décalés\"\n- Sillet NuBone\n- 24 frettes Medium Jumbo en éventail\n- Rayon de la touche: 350 mm\n- Largeur au sillet: 54 mm\n- Diapason: 692/650 mm\n- Barre de réglage (Truss Rod) double action\n- 2 micros double bobinage Hi-Gain\n- 1 réglage de volume\n- 1 réglage de tonalité\n- Sélecteur 3 positions\n- Accastillage noir\n- Mécaniques DLX moulées sous pression\n- Tirant des cordes: .009, .011, .016, .024, .032, .042, .054, .065\n- Accordage: Fa#, Si, Mi, La, Ré, Sol, Si, Mi\n- Finition: Haute brillance\n- Couleur: Blanc\n- Housse adaptée optionnelle non-fournie (142777)\n");
-            $pGuitar->setDiscount("10.1");
-            $pGuitar->setDiscountRate("6");
+            $pGuitar->setName("Harley Benton R-458MN WH Fanfret")
+                ->setDescription("## Guitare éléctrique\n\n- 8 cordes\n- Série Progressive\n- Corps en tilleul\n- Profil du manche: Speed D\n- Manche vissé en érable\n- Touche en érable\n- Repères \"points décalés\"\n- Sillet NuBone\n- 24 frettes Medium Jumbo en éventail\n- Rayon de la touche: 350 mm\n- Largeur au sillet: 54 mm\n- Diapason: 692/650 mm\n- Barre de réglage (Truss Rod) double action\n- 2 micros double bobinage Hi-Gain\n- 1 réglage de volume\n- 1 réglage de tonalité\n- Sélecteur 3 positions\n- Accastillage noir\n- Mécaniques DLX moulées sous pression\n- Tirant des cordes: .009, .011, .016, .024, .032, .042, .054, .065\n- Accordage: Fa#, Si, Mi, La, Ré, Sol, Si, Mi\n- Finition: Haute brillance\n- Couleur: Blanc\n- Housse adaptée optionnelle non-fournie (142777)\n")
+                ->setDiscount("10.1")
+                ->setDiscountRate("6")
+                ->setSupplier($sHarley);
 
 
             $gElec = new Image();
@@ -128,8 +142,9 @@ class AppFixtures extends Fixture
 
 
             $pGuitarClassic = new Product();
-            $pGuitarClassic->setName("Startone GitarLele NT");
-            $pGuitarClassic->setDescription("## Guitarlélé\n\n- Guitare classique 1/8 au format ukulélé\n- Corps en tilleul\n- Manche en nato\n- Touche en Roseacer\n- Diapason: 433 mm\n- Largeur au sillet: 48 mm\n- 17 frettes\n- Chevalet en Roseacer\n- Tête creuse\n- Mécaniques classiques\n- Cordes en nylon (tension moyenne)\n- Accordage: La, Ré, Sol, Do, Mi, La\n- Couleur: Naturel");
+            $pGuitarClassic->setName("Startone GitarLele NT")
+                ->setDescription("## Guitarlélé\n\n- Guitare classique 1/8 au format ukulélé\n- Corps en tilleul\n- Manche en nato\n- Touche en Roseacer\n- Diapason: 433 mm\n- Largeur au sillet: 48 mm\n- 17 frettes\n- Chevalet en Roseacer\n- Tête creuse\n- Mécaniques classiques\n- Cordes en nylon (tension moyenne)\n- Accordage: La, Ré, Sol, Do, Mi, La\n- Couleur: Naturel")
+                ->setSupplier($sStartone);
 
             $iGuitarClassic = new Image();
             $iGuitarClassic->setPath("/img/product/Startone GitarLele NT/1.jpg");
@@ -169,7 +184,7 @@ class AppFixtures extends Fixture
 
         }
 
-        
+
 
 
 

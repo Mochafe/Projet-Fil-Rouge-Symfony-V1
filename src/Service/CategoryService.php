@@ -19,7 +19,6 @@ class CategoryService {
         $this->imageRepository = $imageRepository;
     }
     
-    //TODO main cat can't delete
     public function delete($id) {
 
         //get noCat

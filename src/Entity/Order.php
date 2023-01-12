@@ -2,15 +2,21 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Nette\Utils\DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Nette\Utils\DateTime;
+use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read:order']],
+    paginationEnabled: false
+)]
 class Order
 {
     function __construct() {
@@ -26,6 +32,7 @@ class Order
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(["read:order"])]
     private ?\DateTimeInterface $createAt = null;
 
     #[ORM\Column]
@@ -46,6 +53,7 @@ class Order
     private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'orderUser', targetEntity: OrderDetail::class)]
+    #[Groups(["read:order"])]
     private Collection $orderDetails;
 
     #[ORM\Column]

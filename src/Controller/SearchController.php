@@ -21,7 +21,7 @@ class SearchController extends AbstractController
 
 
         foreach($products as $index => $product) {
-            if($index >= 5) break;
+            if(count($productResponse) >= 5) break;
             if(strpos(strtolower($product->getName()), strtolower($request->query->get("search"))) !== false) {             
                 $productResponse[] = [
                     "id" => $product->getId(),

@@ -15,6 +15,13 @@ orders
 }
 
 Address -- Order
+class CartDetail{
+PK - id
+cart
+product
+quantity
+}
+
 class Cart{
 PK - id
 user
@@ -22,11 +29,11 @@ cartDetails
 }
 
 Cart -- CartDetail
-class CartDetail{
+class Image{
 PK - id
-cart
+path
+title
 product
-quantity
 }
 
 class Category{
@@ -41,13 +48,6 @@ products
 Category -- self
 Category -- self
 Category -- Product
-class Image{
-PK - id
-path
-title
-product
-}
-
 class Order{
 PK - id
 createAt
@@ -83,6 +83,7 @@ content
 images
 cartDetails
 orderDetails
+supplier
 }
 
 Product -- Image
@@ -95,6 +96,13 @@ duns
 user
 }
 
+class Supplier{
+PK - id
+name
+products
+}
+
+Supplier -- Product
 class User{
 PK - id
 email

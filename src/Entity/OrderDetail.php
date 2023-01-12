@@ -24,10 +24,11 @@ class OrderDetail
 
     #[ORM\ManyToOne(inversedBy: 'orderDetails')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(["read:order"])]
     private ?Product $product = null;
 
     #[ORM\Column]
-    #[Groups(["read:product"])]
+    #[Groups(["read:product", "read:order"])]
     private ?int $quantity = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
