@@ -18,7 +18,7 @@ class ApiController extends AbstractController
         return new Response(status: 202);
     }
 
-    #[Route('/api/suppliers_turnover/{id}')]
+    #[Route('/api/supplier_turnover/{id}')]
     public function turnover($id, SupplierService $supplierService) {
         return new Response(\json_encode(["turnover" => $supplierService->turnover($id)]), 200);
 
