@@ -1,7 +1,10 @@
 @url = http://127.0.0.1:8000
 
 
-GET {{url}}/api/products/
-Accept: application/json
+POST {{url}}/api/login_check
+Content-Type: application/json
 
-
+{
+    "username": "mlkmlk",
+    "password": "mmkmlk"
+}
